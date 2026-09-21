@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NEXORA — Wallpapers</title>
+<title>BRUTALS — Wallpapers</title>
 
 <style>
 
@@ -35,8 +35,16 @@ header{
 
 .logo{
     font-size:28px;
-    font-weight:bold;
+    font-weight:800;
     letter-spacing:2px;
+    background: linear-gradient(135deg, #ffffff 0%, #8994a8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
 }
 
 .home-btn{
@@ -48,9 +56,10 @@ header{
     border:1px solid #29344a;
 
     transition:
-        transform 0.25s ease,
+        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
         background 0.25s ease,
-        border-color 0.25s ease;
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 /* HOME BUTTON ANIMATION */
@@ -59,6 +68,7 @@ header{
     transform:translateY(-3px);
     background:#202a3d;
     border-color:#53627d;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 /* =========================
@@ -73,6 +83,7 @@ header{
 .hero h1{
     font-size:40px;
     margin-bottom:10px;
+    letter-spacing: 1px;
 
     transition:
         transform 0.3s ease,
@@ -81,7 +92,7 @@ header{
 
 .hero h1:hover{
     transform:translateY(-3px);
-    text-shadow:0 0 20px rgba(255,255,255,0.25);
+    text-shadow:0 0 20px rgba(255,255,255,0.35);
 }
 
 .hero p{
@@ -116,7 +127,7 @@ header{
 
 .search-box input:focus{
     border-color:#65748f;
-    box-shadow:0 0 18px rgba(255,255,255,0.08);
+    box-shadow:0 0 20px rgba(255,255,255,0.12);
     transform:translateY(-2px);
 }
 
@@ -133,15 +144,16 @@ header{
 }
 
 .category-btn{
-    padding:10px 16px;
+    padding:10px 18px;
     background:#111722;
     color:#cbd3df;
     border:1px solid #283349;
     border-radius:10px;
     cursor:pointer;
+    font-weight:600;
 
     transition:
-        transform 0.25s ease,
+        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
         background 0.25s ease,
         color 0.25s ease,
         border-color 0.25s ease,
@@ -161,6 +173,7 @@ header{
     background:#ffffff;
     color:#080b12;
     border-color:#ffffff;
+    box-shadow: 0 0 15px rgba(255,255,255,0.2);
 }
 
 .category-btn.active:hover{
@@ -193,24 +206,31 @@ header{
     border:1px solid #202a3b;
     border-radius:15px;
     overflow:hidden;
+    animation: fadeIn 0.4s ease-in-out;
 
     /* MAIN ANIMATION */
 
     transition:
-        transform 0.35s ease,
+        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
         border-color 0.35s ease,
         box-shadow 0.35s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* CARD HOVER */
 
 .card:hover{
-    transform:translateY(-8px) scale(1.015);
+    transform:translateY(-8px) scale(1.02);
 
-    border-color:#56647b;
+    border-color:#65748f;
 
     box-shadow:
-        0 15px 35px rgba(0,0,0,0.45);
+        0 20px 40px rgba(0,0,0,0.6),
+        0 0 15px rgba(255,255,255,0.05);
 }
 
 /* =========================
@@ -225,15 +245,15 @@ header{
     display:block;
 
     transition:
-        transform 0.5s ease,
+        transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
         filter 0.5s ease;
 }
 
 /* IMAGE HOVER */
 
 .card:hover img{
-    transform:scale(1.06);
-    filter:brightness(1.08);
+    transform:scale(1.08);
+    filter:brightness(1.1);
 }
 
 /* =========================
@@ -241,13 +261,14 @@ header{
 ========================= */
 
 .card-info{
-    padding:14px;
+    padding:16px;
+    background: linear-gradient(180deg, #0e131d 0%, #0a0e16 100%);
 }
 
 .card-title{
     font-size:17px;
     font-weight:bold;
-    margin-bottom:10px;
+    margin-bottom:12px;
 
     transition:
         transform 0.25s ease,
@@ -259,38 +280,45 @@ header{
 }
 
 /* =========================
-   DOWNLOAD BUTTON
+   IMPROVED DOWNLOAD BUTTON
 ========================= */
 
 .download-btn{
     width:100%;
-    padding:11px;
+    padding:12px;
 
     border:none;
-    border-radius:9px;
+    border-radius:10px;
 
-    background:#ffffff;
+    background: linear-gradient(135deg, #ffffff 0%, #dcdfe6 100%);
     color:#080b12;
 
     font-weight:bold;
+    font-size: 14px;
+    letter-spacing: 0.5px;
     cursor:pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 
     transition:
-        transform 0.25s ease,
+        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
         background 0.25s ease,
         box-shadow 0.25s ease;
 }
 
 .download-btn:hover{
     transform:translateY(-2px);
-    background:#e9edf3;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f2f7 100%);
 
     box-shadow:
-        0 7px 18px rgba(0,0,0,0.35);
+        0 8px 22px rgba(255,255,255,0.25),
+        0 4px 10px rgba(0,0,0,0.3);
 }
 
 .download-btn:active{
-    transform:scale(0.97);
+    transform:scale(0.96);
 }
 
 /* =========================
@@ -354,7 +382,7 @@ header{
 <header>
 
     <div class="logo">
-        NEXORA
+        BRUTALS
     </div>
 
     <a
@@ -483,7 +511,7 @@ header{
 <script>
 
 /* =========================================
-   NEXORA WALLPAPER SYSTEM
+   BRUTALS WALLPAPER SYSTEM
    =========================================
 
    Maximum:
@@ -647,11 +675,6 @@ async function loadWallpapers(){
 
         /* ================================
            GAMING
-
-           gaming.avif = Gaming 1
-           gaming2 = Gaming 2
-           gaming3 = Gaming 3
-           ...
         ================================= */
 
 
@@ -717,19 +740,6 @@ async function loadWallpapers(){
 
         /* ================================
            OTHER CATEGORIES
-
-           anime1
-           anime2
-           anime3
-           ...
-
-           dark1
-           dark2
-           ...
-
-           car1
-           car2
-           ...
         ================================= */
 
 
