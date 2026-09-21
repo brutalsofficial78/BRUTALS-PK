@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NEXORA — Wallpapers</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#080b12;
+    color:white;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 6%;
+    background:#0d111b;
+    border-bottom:1px solid #202838;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.home-btn{
+    text-decoration:none;
+    color:white;
+    background:#151c2b;
+    padding:10px 18px;
+    border-radius:10px;
+    border:1px solid #29344a;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+/* HOME BUTTON ANIMATION */
+
+.home-btn:hover{
+    transform:translateY(-3px);
+    background:#202a3d;
+    border-color:#53627d;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    text-align:center;
+    padding:45px 20px 30px;
+}
+
+.hero h1{
+    font-size:40px;
+    margin-bottom:10px;
+
+    transition:
+        transform 0.3s ease,
+        text-shadow 0.3s ease;
+}
+
+.hero h1:hover{
+    transform:translateY(-3px);
+    text-shadow:0 0 20px rgba(255,255,255,0.25);
+}
+
+.hero p{
+    color:#8994a8;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box{
+    max-width:650px;
+    margin:20px auto;
+    padding:0 20px;
+}
+
+.search-box input{
+    width:100%;
+    padding:15px 18px;
+    background:#111722;
+    color:white;
+    border:1px solid #283349;
+    border-radius:12px;
+    outline:none;
+    font-size:16px;
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.25s ease;
+}
+
+.search-box input:focus{
+    border-color:#65748f;
+    box-shadow:0 0 18px rgba(255,255,255,0.08);
+    transform:translateY(-2px);
+}
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.categories{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    padding:10px 20px 30px;
+}
+
+.category-btn{
+    padding:10px 16px;
+    background:#111722;
+    color:#cbd3df;
+    border:1px solid #283349;
+    border-radius:10px;
+    cursor:pointer;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* CATEGORY HOVER */
+
+.category-btn:hover{
+    transform:translateY(-3px);
+    background:#1a2231;
+    border-color:#59677f;
+    box-shadow:0 7px 20px rgba(0,0,0,0.35);
+}
+
+.category-btn.active{
+    background:#ffffff;
+    color:#080b12;
+    border-color:#ffffff;
+}
+
+.category-btn.active:hover{
+    background:#f0f0f0;
+}
+
+/* =========================
+   WALLPAPER GRID
+========================= */
+
+.wallpaper-grid{
+    width:90%;
+    max-width:1400px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(240px,1fr));
+
+    gap:22px;
+    padding-bottom:50px;
+}
+
+/* =========================
+   WALLPAPER CARD
+========================= */
+
+.card{
+    background:#0e131d;
+    border:1px solid #202a3b;
+    border-radius:15px;
+    overflow:hidden;
+
+    /* MAIN ANIMATION */
+
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+/* CARD HOVER */
+
+.card:hover{
+    transform:translateY(-8px) scale(1.015);
+
+    border-color:#56647b;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.45);
+}
+
+/* =========================
+   IMAGE
+========================= */
+
+.card img{
+    width:100%;
+    height:330px;
+
+    object-fit:cover;
+    display:block;
+
+    transition:
+        transform 0.5s ease,
+        filter 0.5s ease;
+}
+
+/* IMAGE HOVER */
+
+.card:hover img{
+    transform:scale(1.06);
+    filter:brightness(1.08);
+}
+
+/* =========================
+   CARD INFO
+========================= */
+
+.card-info{
+    padding:14px;
+}
+
+.card-title{
+    font-size:17px;
+    font-weight:bold;
+    margin-bottom:10px;
+
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
+}
+
+.card:hover .card-title{
+    transform:translateX(3px);
+}
+
+/* =========================
+   DOWNLOAD BUTTON
+========================= */
+
+.download-btn{
+    width:100%;
+    padding:11px;
+
+    border:none;
+    border-radius:9px;
+
+    background:#ffffff;
+    color:#080b12;
+
+    font-weight:bold;
+    cursor:pointer;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.download-btn:hover{
+    transform:translateY(-2px);
+    background:#e9edf3;
+
+    box-shadow:
+        0 7px 18px rgba(0,0,0,0.35);
+}
+
+.download-btn:active{
+    transform:scale(0.97);
+}
+
+/* =========================
+   EMPTY MESSAGE
+========================= */
+
+.empty{
+    text-align:center;
+    color:#7e899d;
+    padding:60px 20px;
+
+    grid-column:1/-1;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    .card img{
+        height:300px;
+    }
+
+    .wallpaper-grid{
+        width:92%;
+        grid-template-columns:
+            repeat(auto-fit,minmax(180px,1fr));
+    }
+
+}
+
+/* =========================
+   REDUCE MOTION SUPPORT
+========================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *{
+        scroll-behavior:auto !important;
+        transition:none !important;
+        animation:none !important;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+        NEXORA
+    </div>
+
+    <a
+        href="index.html"
+        class="home-btn"
+    >
+        ← Back to Home
+    </a>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <h1>
+        🖼️ WALLPAPERS
+    </h1>
+
+    <p>
+        Premium wallpapers for your device
+    </p>
+
+</section>
+
+
+<!-- =========================
+     SEARCH
+========================= -->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search wallpaper..."
+    >
+
+</div>
+
+
+<!-- =========================
+     CATEGORIES
+========================= -->
+
+<div class="categories">
+
+    <button
+        class="category-btn active"
+        data-category="all"
+    >
+        ALL
+    </button>
+
+    <button
+        class="category-btn"
+        data-category="gaming"
+    >
+        GAMING
+    </button>
+
+    <button
+        class="category-btn"
+        data-category="anime"
+    >
+        ANIME
+    </button>
+
+    <button
+        class="category-btn"
+        data-category="dark"
+    >
+        DARK
+    </button>
+
+    <button
+        class="category-btn"
+        data-category="cars"
+    >
+        CARS
+    </button>
+
+    <button
+        class="category-btn"
+        data-category="aesthetic"
+    >
+        AESTHETIC
+    </button>
+
+    <button
+        class="category-btn"
+        data-category="4k"
+    >
+        4K
+    </button>
+
+    <button
+        class="category-btn"
+        data-category="freefire"
+    >
+        FREE FIRE
+    </button>
+
+</div>
+
+
+<!-- =========================
+     WALLPAPER GRID
+========================= -->
+
+<div
+    class="wallpaper-grid"
+    id="wallpaperGrid"
+>
+
+    <div class="empty">
+        Loading wallpapers...
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   NEXORA WALLPAPER SYSTEM
+   =========================================
+
+   Maximum:
+   30 wallpapers per category
+
+   Supported:
+   AVIF
+   JPG
+   JPEG
+   PNG
+   WEBP
+
+   Only EXISTING images are shown.
+========================================= */
+
+
+const MAX_WALLPAPERS = 30;
+
+
+const extensions = [
+    "avif",
+    "jpg",
+    "jpeg",
+    "png",
+    "webp"
+];
+
+
+/* =========================================
+   CATEGORY SETTINGS
+========================================= */
+
+const categories = {
+
+    gaming: {
+        name: "Gaming",
+        folder: "wallpaper",
+        base: "gaming"
+    },
+
+    anime: {
+        name: "Anime",
+        folder: "wallpaper",
+        base: "anime"
+    },
+
+    dark: {
+        name: "Dark",
+        folder: "wallpaper",
+        base: "dark"
+    },
+
+    cars: {
+        name: "Cars",
+        folder: "wallpaper",
+        base: "car"
+    },
+
+    aesthetic: {
+        name: "Aesthetic",
+        folder: "wallpaper",
+        base: "aesthetic"
+    },
+
+    "4k": {
+        name: "4K",
+        folder: "wallpaper",
+        base: "4k"
+    },
+
+    freefire: {
+        name: "Free Fire",
+        folder: "wallpaper",
+        base: "freefire"
+    }
+
+};
+
+
+let wallpapers = [];
+
+let selectedCategory = "all";
+
+let searchText = "";
+
+
+/* =========================================
+   CHECK IMAGE EXISTS
+========================================= */
+
+function checkImage(url){
+
+    return new Promise((resolve) => {
+
+        const img = new Image();
+
+        img.onload = function(){
+
+            resolve(true);
+
+        };
+
+        img.onerror = function(){
+
+            resolve(false);
+
+        };
+
+        img.src = url;
+
+    });
+
+}
+
+
+/* =========================================
+   FIND IMAGE EXTENSION
+========================================= */
+
+async function findImage(basePath){
+
+    for(const ext of extensions){
+
+        const url =
+            `${basePath}.${ext}`;
+
+        const exists =
+            await checkImage(url);
+
+        if(exists){
+
+            return url;
+
+        }
+
+    }
+
+    return null;
+
+}
+
+
+/* =========================================
+   LOAD ALL WALLPAPERS
+========================================= */
+
+async function loadWallpapers(){
+
+    wallpapers = [];
+
+
+    const categoryNames =
+        Object.keys(categories);
+
+
+    for(const categoryKey of categoryNames){
+
+        const category =
+            categories[categoryKey];
+
+
+        /* ================================
+           GAMING
+
+           gaming.avif = Gaming 1
+           gaming2 = Gaming 2
+           gaming3 = Gaming 3
+           ...
+        ================================= */
+
+
+        if(categoryKey === "gaming"){
+
+            const firstImage =
+                await findImage(
+                    `${category.folder}/${category.base}`
+                );
+
+
+            if(firstImage){
+
+                wallpapers.push({
+
+                    name:
+                        `${category.name} 1`,
+
+                    image:
+                        firstImage,
+
+                    category:
+                        categoryKey
+
+                });
+
+            }
+
+
+            for(
+                let number = 2;
+                number <= MAX_WALLPAPERS;
+                number++
+            ){
+
+                const image =
+                    await findImage(
+                        `${category.folder}/${category.base}${number}`
+                    );
+
+
+                if(image){
+
+                    wallpapers.push({
+
+                        name:
+                            `${category.name} ${number}`,
+
+                        image:
+                            image,
+
+                        category:
+                            categoryKey
+
+                    });
+
+                }
+
+            }
+
+        }
+
+
+        /* ================================
+           OTHER CATEGORIES
+
+           anime1
+           anime2
+           anime3
+           ...
+
+           dark1
+           dark2
+           ...
+
+           car1
+           car2
+           ...
+        ================================= */
+
+
+        else{
+
+            for(
+                let number = 1;
+                number <= MAX_WALLPAPERS;
+                number++
+            ){
+
+                const image =
+                    await findImage(
+                        `${category.folder}/${category.base}${number}`
+                    );
+
+
+                if(image){
+
+                    wallpapers.push({
+
+                        name:
+                            `${category.name} ${number}`,
+
+                        image:
+                            image,
+
+                        category:
+                            categoryKey
+
+                    });
+
+                }
+
+            }
+
+        }
+
+    }
+
+
+    renderWallpapers();
+
+}
+
+
+/* =========================================
+   RENDER WALLPAPERS
+========================================= */
+
+function renderWallpapers(){
+
+    const grid =
+        document.getElementById(
+            "wallpaperGrid"
+        );
+
+
+    grid.innerHTML = "";
+
+
+    const filtered =
+        wallpapers.filter(wallpaper => {
+
+
+            const categoryMatch =
+
+                selectedCategory === "all" ||
+
+                wallpaper.category ===
+                selectedCategory;
+
+
+            const searchMatch =
+
+                wallpaper.name
+                    .toLowerCase()
+                    .includes(
+                        searchText.toLowerCase()
+                    );
+
+
+            return (
+                categoryMatch &&
+                searchMatch
+            );
+
+        });
+
+
+    /* NO RESULTS */
+
+    if(filtered.length === 0){
+
+        grid.innerHTML = `
+
+            <div class="empty">
+
+                No wallpapers found.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* CREATE CARDS */
+
+    filtered.forEach(wallpaper => {
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className = "card";
+
+
+        card.innerHTML = `
+
+            <img
+                src="${wallpaper.image}"
+                alt="${wallpaper.name}"
+            >
+
+            <div class="card-info">
+
+                <div class="card-title">
+
+                    ${wallpaper.name}
+
+                </div>
+
+
+                <button
+                    class="download-btn"
+                >
+
+                    ⬇ Download
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        /* DOWNLOAD BUTTON */
+
+        const downloadButton =
+            card.querySelector(
+                ".download-btn"
+            );
+
+
+        downloadButton.addEventListener(
+            "click",
+            function(){
+
+                downloadWallpaper(
+                    wallpaper.image,
+                    wallpaper.name
+                );
+
+            }
+        );
+
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================
+   DOWNLOAD WALLPAPER
+========================================= */
+
+function downloadWallpaper(
+    image,
+    name
+){
+
+    const link =
+        document.createElement("a");
+
+
+    link.href = image;
+
+
+    link.download =
+        name.replaceAll(
+            " ",
+            "_"
+        );
+
+
+    document.body.appendChild(link);
+
+
+    link.click();
+
+
+    document.body.removeChild(link);
+
+}
+
+
+/* =========================================
+   CATEGORY BUTTONS
+========================================= */
+
+document
+    .querySelectorAll(
+        ".category-btn"
+    )
+    .forEach(button => {
+
+
+        button.addEventListener(
+            "click",
+            function(){
+
+
+                document
+                    .querySelectorAll(
+                        ".category-btn"
+                    )
+                    .forEach(btn => {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                this.classList.add(
+                    "active"
+                );
+
+
+                selectedCategory =
+                    this.dataset.category;
+
+
+                renderWallpapers();
+
+            }
+        );
+
+    });
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+document
+    .getElementById(
+        "searchInput"
+    )
+    .addEventListener(
+        "input",
+        function(){
+
+            searchText =
+                this.value;
+
+
+            renderWallpapers();
+
+        }
+    );
+
+
+/* =========================================
+   START
+========================================= */
+
+loadWallpapers();
+
+</script>
+
+</body>
+</html>
