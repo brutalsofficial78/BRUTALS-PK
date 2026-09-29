@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BRUTALS — Wallpapers</title>
+<title>NEXORA — Wallpapers</title>
 
 <style>
 
@@ -35,16 +35,8 @@ header{
 
 .logo{
     font-size:28px;
-    font-weight:800;
+    font-weight:bold;
     letter-spacing:2px;
-    background: linear-gradient(135deg, #ffffff 0%, #8994a8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    transition: transform 0.3s ease;
-}
-
-.logo:hover {
-    transform: scale(1.05);
 }
 
 .home-btn{
@@ -56,19 +48,15 @@ header{
     border:1px solid #29344a;
 
     transition:
-        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.25s ease,
         background 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
+        border-color 0.25s ease;
 }
-
-/* HOME BUTTON ANIMATION */
 
 .home-btn:hover{
     transform:translateY(-3px);
     background:#202a3d;
     border-color:#53627d;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 /* =========================
@@ -83,7 +71,6 @@ header{
 .hero h1{
     font-size:40px;
     margin-bottom:10px;
-    letter-spacing: 1px;
 
     transition:
         transform 0.3s ease,
@@ -92,7 +79,7 @@ header{
 
 .hero h1:hover{
     transform:translateY(-3px);
-    text-shadow:0 0 20px rgba(255,255,255,0.35);
+    text-shadow:0 0 20px rgba(255,255,255,0.25);
 }
 
 .hero p{
@@ -127,7 +114,7 @@ header{
 
 .search-box input:focus{
     border-color:#65748f;
-    box-shadow:0 0 20px rgba(255,255,255,0.12);
+    box-shadow:0 0 18px rgba(255,255,255,0.08);
     transform:translateY(-2px);
 }
 
@@ -144,23 +131,20 @@ header{
 }
 
 .category-btn{
-    padding:10px 18px;
+    padding:10px 16px;
     background:#111722;
     color:#cbd3df;
     border:1px solid #283349;
     border-radius:10px;
     cursor:pointer;
-    font-weight:600;
 
     transition:
-        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.25s ease,
         background 0.25s ease,
         color 0.25s ease,
         border-color 0.25s ease,
         box-shadow 0.25s ease;
 }
-
-/* CATEGORY HOVER */
 
 .category-btn:hover{
     transform:translateY(-3px);
@@ -173,7 +157,6 @@ header{
     background:#ffffff;
     color:#080b12;
     border-color:#ffffff;
-    box-shadow: 0 0 15px rgba(255,255,255,0.2);
 }
 
 .category-btn.active:hover{
@@ -206,31 +189,20 @@ header{
     border:1px solid #202a3b;
     border-radius:15px;
     overflow:hidden;
-    animation: fadeIn 0.4s ease-in-out;
-
-    /* MAIN ANIMATION */
 
     transition:
-        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.35s ease,
         border-color 0.35s ease,
         box-shadow 0.35s ease;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* CARD HOVER */
-
 .card:hover{
-    transform:translateY(-8px) scale(1.02);
+    transform:translateY(-8px) scale(1.015);
 
-    border-color:#65748f;
+    border-color:#56647b;
 
     box-shadow:
-        0 20px 40px rgba(0,0,0,0.6),
-        0 0 15px rgba(255,255,255,0.05);
+        0 15px 35px rgba(0,0,0,0.45);
 }
 
 /* =========================
@@ -245,15 +217,13 @@ header{
     display:block;
 
     transition:
-        transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.5s ease,
         filter 0.5s ease;
 }
 
-/* IMAGE HOVER */
-
 .card:hover img{
-    transform:scale(1.08);
-    filter:brightness(1.1);
+    transform:scale(1.06);
+    filter:brightness(1.08);
 }
 
 /* =========================
@@ -261,14 +231,13 @@ header{
 ========================= */
 
 .card-info{
-    padding:16px;
-    background: linear-gradient(180deg, #0e131d 0%, #0a0e16 100%);
+    padding:14px;
 }
 
 .card-title{
     font-size:17px;
     font-weight:bold;
-    margin-bottom:12px;
+    margin-bottom:10px;
 
     transition:
         transform 0.25s ease,
@@ -280,45 +249,38 @@ header{
 }
 
 /* =========================
-   IMPROVED DOWNLOAD BUTTON
+   DOWNLOAD BUTTON
 ========================= */
 
 .download-btn{
     width:100%;
-    padding:12px;
+    padding:11px;
 
     border:none;
-    border-radius:10px;
+    border-radius:9px;
 
-    background: linear-gradient(135deg, #ffffff 0%, #dcdfe6 100%);
+    background:#ffffff;
     color:#080b12;
 
     font-weight:bold;
-    font-size: 14px;
-    letter-spacing: 0.5px;
     cursor:pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
 
     transition:
-        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.25s ease,
         background 0.25s ease,
         box-shadow 0.25s ease;
 }
 
 .download-btn:hover{
     transform:translateY(-2px);
-    background: linear-gradient(135deg, #ffffff 0%, #f0f2f7 100%);
+    background:#e9edf3;
 
     box-shadow:
-        0 8px 22px rgba(255,255,255,0.25),
-        0 4px 10px rgba(0,0,0,0.3);
+        0 7px 18px rgba(0,0,0,0.35);
 }
 
 .download-btn:active{
-    transform:scale(0.96);
+    transform:scale(0.97);
 }
 
 /* =========================
@@ -382,7 +344,7 @@ header{
 <header>
 
     <div class="logo">
-        BRUTALS
+        NEXORA
     </div>
 
     <a
@@ -511,11 +473,10 @@ header{
 <script>
 
 /* =========================================
-   BRUTALS WALLPAPER SYSTEM
+   NEXORA WALLPAPER SYSTEM
    =========================================
 
-   Maximum:
-   30 wallpapers per category
+   10 wallpapers per category
 
    Supported:
    AVIF
@@ -524,11 +485,16 @@ header{
    PNG
    WEBP
 
-   Only EXISTING images are shown.
+   Wallpapers are checked in parallel
+   instead of one-by-one.
 ========================================= */
 
 
-const MAX_WALLPAPERS = 30;
+/* =========================
+   SETTINGS
+========================= */
+
+const MAX_WALLPAPERS = 10;
 
 
 const extensions = [
@@ -540,9 +506,9 @@ const extensions = [
 ];
 
 
-/* =========================================
+/* =========================
    CATEGORY SETTINGS
-========================================= */
+========================= */
 
 const categories = {
 
@@ -591,34 +557,43 @@ const categories = {
 };
 
 
+/* =========================
+   VARIABLES
+========================= */
+
 let wallpapers = [];
 
 let selectedCategory = "all";
 
 let searchText = "";
 
+let loadingFinished = false;
+
 
 /* =========================================
-   CHECK IMAGE EXISTS
+   CHECK IMAGE
 ========================================= */
 
 function checkImage(url){
 
-    return new Promise((resolve) => {
+    return new Promise(function(resolve){
 
         const img = new Image();
 
+
         img.onload = function(){
 
-            resolve(true);
+            resolve(url);
 
         };
+
 
         img.onerror = function(){
 
-            resolve(false);
+            resolve(null);
 
         };
+
 
         img.src = url;
 
@@ -629,25 +604,38 @@ function checkImage(url){
 
 /* =========================================
    FIND IMAGE EXTENSION
+   CHECK ALL EXTENSIONS AT ONCE
 ========================================= */
 
 async function findImage(basePath){
 
-    for(const ext of extensions){
+    const requests = extensions.map(
+        function(ext){
 
-        const url =
-            `${basePath}.${ext}`;
+            return checkImage(
+                `${basePath}.${ext}`
+            );
 
-        const exists =
-            await checkImage(url);
+        }
+    );
 
-        if(exists){
 
-            return url;
+    const results =
+        await Promise.all(requests);
+
+
+    for(
+        const result of results
+    ){
+
+        if(result){
+
+            return result;
 
         }
 
     }
+
 
     return null;
 
@@ -655,133 +643,171 @@ async function findImage(basePath){
 
 
 /* =========================================
-   LOAD ALL WALLPAPERS
+   LOAD ONE WALLPAPER
+========================================= */
+
+async function loadWallpaper(
+    categoryKey,
+    category,
+    number
+){
+
+    let fileNumber = number;
+
+
+    /*
+       GAMING SPECIAL CASE
+
+       gaming.avif = Gaming 1
+       gaming2.jpg = Gaming 2
+       gaming3.png = Gaming 3
+    */
+
+    if(
+        categoryKey === "gaming" &&
+        number === 1
+    ){
+
+        fileNumber = "";
+
+    }
+
+
+    const basePath =
+        `${category.folder}/${category.base}${fileNumber}`;
+
+
+    const image =
+        await findImage(basePath);
+
+
+    if(!image){
+
+        return;
+
+    }
+
+
+    wallpapers.push({
+
+        name:
+            `${category.name} ${number}`,
+
+        image:
+            image,
+
+        category:
+            categoryKey
+
+    });
+
+
+    /*
+       Show the wallpaper immediately
+       when it is found.
+    */
+
+    renderWallpapers();
+
+}
+
+
+/* =========================================
+   LOAD CATEGORY
+========================================= */
+
+async function loadCategory(
+    categoryKey,
+    category
+){
+
+    const requests = [];
+
+
+    for(
+        let number = 1;
+        number <= MAX_WALLPAPERS;
+        number++
+    ){
+
+        requests.push(
+
+            loadWallpaper(
+                categoryKey,
+                category,
+                number
+            )
+
+        );
+
+    }
+
+
+    await Promise.all(requests);
+
+}
+
+
+/* =========================================
+   LOAD ALL CATEGORIES
 ========================================= */
 
 async function loadWallpapers(){
 
     wallpapers = [];
 
-
-    const categoryNames =
-        Object.keys(categories);
+    loadingFinished = false;
 
 
-    for(const categoryKey of categoryNames){
-
-        const category =
-            categories[categoryKey];
-
-
-        /* ================================
-           GAMING
-        ================================= */
+    const grid =
+        document.getElementById(
+            "wallpaperGrid"
+        );
 
 
-        if(categoryKey === "gaming"){
+    grid.innerHTML = `
 
-            const firstImage =
-                await findImage(
-                    `${category.folder}/${category.base}`
-                );
+        <div class="empty">
 
+            Loading wallpapers...
 
-            if(firstImage){
+        </div>
 
-                wallpapers.push({
-
-                    name:
-                        `${category.name} 1`,
-
-                    image:
-                        firstImage,
-
-                    category:
-                        categoryKey
-
-                });
-
-            }
+    `;
 
 
-            for(
-                let number = 2;
-                number <= MAX_WALLPAPERS;
-                number++
-            ){
-
-                const image =
-                    await findImage(
-                        `${category.folder}/${category.base}${number}`
-                    );
+    const requests = [];
 
 
-                if(image){
+    /*
+       Load EVERY category at the same time.
+    */
 
-                    wallpapers.push({
+    for(
+        const categoryKey
+        of Object.keys(categories)
+    ){
 
-                        name:
-                            `${category.name} ${number}`,
+        requests.push(
 
-                        image:
-                            image,
+            loadCategory(
+                categoryKey,
+                categories[categoryKey]
+            )
 
-                        category:
-                            categoryKey
-
-                    });
-
-                }
-
-            }
-
-        }
-
-
-        /* ================================
-           OTHER CATEGORIES
-        ================================= */
-
-
-        else{
-
-            for(
-                let number = 1;
-                number <= MAX_WALLPAPERS;
-                number++
-            ){
-
-                const image =
-                    await findImage(
-                        `${category.folder}/${category.base}${number}`
-                    );
-
-
-                if(image){
-
-                    wallpapers.push({
-
-                        name:
-                            `${category.name} ${number}`,
-
-                        image:
-                            image,
-
-                        category:
-                            categoryKey
-
-                    });
-
-                }
-
-            }
-
-        }
+        );
 
     }
 
 
+    await Promise.all(requests);
+
+
+    loadingFinished = true;
+
+
     renderWallpapers();
+
 
 }
 
@@ -798,41 +824,59 @@ function renderWallpapers(){
         );
 
 
-    grid.innerHTML = "";
-
-
     const filtered =
-        wallpapers.filter(wallpaper => {
+        wallpapers.filter(
+            function(wallpaper){
+
+                const categoryMatch =
+
+                    selectedCategory === "all" ||
+
+                    wallpaper.category ===
+                    selectedCategory;
 
 
-            const categoryMatch =
+                const searchMatch =
 
-                selectedCategory === "all" ||
-
-                wallpaper.category ===
-                selectedCategory;
-
-
-            const searchMatch =
-
-                wallpaper.name
-                    .toLowerCase()
-                    .includes(
-                        searchText.toLowerCase()
-                    );
+                    wallpaper.name
+                        .toLowerCase()
+                        .includes(
+                            searchText.toLowerCase()
+                        );
 
 
-            return (
-                categoryMatch &&
-                searchMatch
-            );
+                return (
+                    categoryMatch &&
+                    searchMatch
+                );
 
-        });
+            }
+        );
 
 
-    /* NO RESULTS */
+    /*
+       Nothing loaded yet.
+    */
 
-    if(filtered.length === 0){
+    if(
+        filtered.length === 0 &&
+        !loadingFinished
+    ){
+
+        return;
+
+    }
+
+
+    /*
+       Loading is finished but
+       no wallpaper exists.
+    */
+
+    if(
+        filtered.length === 0 &&
+        loadingFinished
+    ){
 
         grid.innerHTML = `
 
@@ -849,71 +893,81 @@ function renderWallpapers(){
     }
 
 
-    /* CREATE CARDS */
-
-    filtered.forEach(wallpaper => {
+    grid.innerHTML = "";
 
 
-        const card =
-            document.createElement("div");
+    /*
+       CREATE WALLPAPER CARDS
+    */
+
+    filtered.forEach(
+        function(wallpaper){
+
+            const card =
+                document.createElement(
+                    "div"
+                );
 
 
-        card.className = "card";
+            card.className = "card";
 
 
-        card.innerHTML = `
+            card.innerHTML = `
 
-            <img
-                src="${wallpaper.image}"
-                alt="${wallpaper.name}"
-            >
+                <img
+                    src="${wallpaper.image}"
+                    alt="${wallpaper.name}"
+                    loading="eager"
+                >
 
-            <div class="card-info">
+                <div class="card-info">
 
-                <div class="card-title">
+                    <div class="card-title">
 
-                    ${wallpaper.name}
+                        ${wallpaper.name}
+
+                    </div>
+
+                    <button
+                        class="download-btn"
+                    >
+
+                        ⬇ Download
+
+                    </button>
 
                 </div>
 
-
-                <button
-                    class="download-btn"
-                >
-
-                    ⬇ Download
-
-                </button>
-
-            </div>
-
-        `;
+            `;
 
 
-        /* DOWNLOAD BUTTON */
+            /*
+               DOWNLOAD BUTTON
+            */
 
-        const downloadButton =
-            card.querySelector(
-                ".download-btn"
+            const downloadButton =
+                card.querySelector(
+                    ".download-btn"
+                );
+
+
+            downloadButton.addEventListener(
+                "click",
+                function(){
+
+                    downloadWallpaper(
+                        wallpaper.image,
+                        wallpaper.name
+                    );
+
+                }
             );
 
 
-        downloadButton.addEventListener(
-            "click",
-            function(){
+            grid.appendChild(card);
 
-                downloadWallpaper(
-                    wallpaper.image,
-                    wallpaper.name
-                );
-
-            }
-        );
-
-
-        grid.appendChild(card);
-
-    });
+        }
+    );
 
 }
 
@@ -928,7 +982,9 @@ function downloadWallpaper(
 ){
 
     const link =
-        document.createElement("a");
+        document.createElement(
+            "a"
+        );
 
 
     link.href = image;
@@ -941,13 +997,17 @@ function downloadWallpaper(
         );
 
 
-    document.body.appendChild(link);
+    document.body.appendChild(
+        link
+    );
 
 
     link.click();
 
 
-    document.body.removeChild(link);
+    document.body.removeChild(
+        link
+    );
 
 }
 
@@ -960,42 +1020,44 @@ document
     .querySelectorAll(
         ".category-btn"
     )
-    .forEach(button => {
+    .forEach(
+        function(button){
 
+            button.addEventListener(
+                "click",
+                function(){
 
-        button.addEventListener(
-            "click",
-            function(){
+                    document
+                        .querySelectorAll(
+                            ".category-btn"
+                        )
+                        .forEach(
+                            function(btn){
 
+                                btn.classList.remove(
+                                    "active"
+                                );
 
-                document
-                    .querySelectorAll(
-                        ".category-btn"
-                    )
-                    .forEach(btn => {
-
-                        btn.classList.remove(
-                            "active"
+                            }
                         );
 
-                    });
+
+                    this.classList.add(
+                        "active"
+                    );
 
 
-                this.classList.add(
-                    "active"
-                );
+                    selectedCategory =
+                        this.dataset.category;
 
 
-                selectedCategory =
-                    this.dataset.category;
+                    renderWallpapers();
 
+                }
+            );
 
-                renderWallpapers();
-
-            }
-        );
-
-    });
+        }
+    );
 
 
 /* =========================================
