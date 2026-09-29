@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NEXORA — Wallpapers</title>
+<title>BRUTALS PK — Wallpapers</title>
 
 <style>
 
@@ -284,7 +284,7 @@ header{
 }
 
 /* =========================
-   EMPTY MESSAGE
+   EMPTY / LOADING
 ========================= */
 
 .empty{
@@ -318,7 +318,7 @@ header{
 }
 
 /* =========================
-   REDUCE MOTION SUPPORT
+   REDUCE MOTION
 ========================= */
 
 @media(prefers-reduced-motion:reduce){
@@ -344,7 +344,7 @@ header{
 <header>
 
     <div class="logo">
-        NEXORA
+        BRUTALS PK
     </div>
 
     <a
@@ -473,8 +473,7 @@ header{
 <script>
 
 /* =========================================
-   NEXORA WALLPAPER SYSTEM
-   =========================================
+   BRUTALS PK WALLPAPER SYSTEM
 
    10 wallpapers per category
 
@@ -484,18 +483,15 @@ header{
    JPEG
    PNG
    WEBP
-
-   Wallpapers are checked in parallel
-   instead of one-by-one.
 ========================================= */
 
 
-/* =========================
-   SETTINGS
-========================= */
+/* Maximum wallpapers per category */
 
 const MAX_WALLPAPERS = 10;
 
+
+/* Supported extensions */
 
 const extensions = [
     "avif",
@@ -506,9 +502,9 @@ const extensions = [
 ];
 
 
-/* =========================
+/* =========================================
    CATEGORY SETTINGS
-========================= */
+========================================= */
 
 const categories = {
 
@@ -557,17 +553,15 @@ const categories = {
 };
 
 
-/* =========================
+/* =========================================
    VARIABLES
-========================= */
+========================================= */
 
 let wallpapers = [];
 
 let selectedCategory = "all";
 
 let searchText = "";
-
-let loadingFinished = false;
 
 
 /* =========================================
@@ -576,24 +570,17 @@ let loadingFinished = false;
 
 function checkImage(url){
 
-    return new Promise(function(resolve){
+    return new Promise((resolve) => {
 
         const img = new Image();
 
-
         img.onload = function(){
-
-            resolve(url);
-
+            resolve(true);
         };
-
 
         img.onerror = function(){
-
-            resolve(null);
-
+            resolve(false);
         };
-
 
         img.src = url;
 
@@ -603,117 +590,45 @@ function checkImage(url){
 
 
 /* =========================================
-   FIND IMAGE EXTENSION
-   CHECK ALL EXTENSIONS AT ONCE
+   FIND IMAGE
+
+   All extensions are checked together
+   instead of one-by-one.
 ========================================= */
 
 async function findImage(basePath){
 
-    const requests = extensions.map(
-        function(ext){
+    const results = await Promise.all(
 
-            return checkImage(
-                `${basePath}.${ext}`
-            );
+        extensions.map(async (ext) => {
 
-        }
+            const url =
+                `${basePath}.${ext}`;
+
+            const exists =
+                await checkImage(url);
+
+            return {
+                url: url,
+                exists: exists
+            };
+
+        })
+
     );
 
 
-    const results =
-        await Promise.all(requests);
+    const found =
+        results.find(item => item.exists);
 
 
-    for(
-        const result of results
-    ){
-
-        if(result){
-
-            return result;
-
-        }
-
-    }
-
-
-    return null;
+    return found ? found.url : null;
 
 }
 
 
 /* =========================================
-   LOAD ONE WALLPAPER
-========================================= */
-
-async function loadWallpaper(
-    categoryKey,
-    category,
-    number
-){
-
-    let fileNumber = number;
-
-
-    /*
-       GAMING SPECIAL CASE
-
-       gaming.avif = Gaming 1
-       gaming2.jpg = Gaming 2
-       gaming3.png = Gaming 3
-    */
-
-    if(
-        categoryKey === "gaming" &&
-        number === 1
-    ){
-
-        fileNumber = "";
-
-    }
-
-
-    const basePath =
-        `${category.folder}/${category.base}${fileNumber}`;
-
-
-    const image =
-        await findImage(basePath);
-
-
-    if(!image){
-
-        return;
-
-    }
-
-
-    wallpapers.push({
-
-        name:
-            `${category.name} ${number}`,
-
-        image:
-            image,
-
-        category:
-            categoryKey
-
-    });
-
-
-    /*
-       Show the wallpaper immediately
-       when it is found.
-    */
-
-    renderWallpapers();
-
-}
-
-
-/* =========================================
-   LOAD CATEGORY
+   LOAD ONE CATEGORY
 ========================================= */
 
 async function loadCategory(
@@ -721,93 +636,145 @@ async function loadCategory(
     category
 ){
 
-    const requests = [];
+    const promises = [];
 
 
-    for(
-        let number = 1;
-        number <= MAX_WALLPAPERS;
-        number++
-    ){
+    /*
+       Gaming:
+       gaming
+       gaming2
+       gaming3
+       ...
+       gaming10
+    */
 
-        requests.push(
+    if(categoryKey === "gaming"){
 
-            loadWallpaper(
-                categoryKey,
-                category,
-                number
+        promises.push(
+            findImage(
+                `${category.folder}/${category.base}`
             )
-
         );
+
+
+        for(
+            let number = 2;
+            number <= MAX_WALLPAPERS;
+            number++
+        ){
+
+            promises.push(
+                findImage(
+                    `${category.folder}/${category.base}${number}`
+                )
+            );
+
+        }
 
     }
 
 
-    await Promise.all(requests);
+    /*
+       Other categories:
+       anime1 - anime10
+       dark1 - dark10
+       car1 - car10
+       etc.
+    */
+
+    else{
+
+        for(
+            let number = 1;
+            number <= MAX_WALLPAPERS;
+            number++
+        ){
+
+            promises.push(
+                findImage(
+                    `${category.folder}/${category.base}${number}`
+                )
+            );
+
+        }
+
+    }
+
+
+    const images =
+        await Promise.all(promises);
+
+
+    images.forEach(
+        (image, index) => {
+
+            if(!image){
+                return;
+            }
+
+
+            let number =
+                index + 1;
+
+
+            wallpapers.push({
+
+                name:
+                    `${category.name} ${number}`,
+
+                image:
+                    image,
+
+                category:
+                    categoryKey
+
+            });
+
+        }
+    );
+
+
+    /*
+       Show whatever has already loaded
+       instead of waiting for every category.
+    */
+
+    renderWallpapers();
 
 }
 
 
 /* =========================================
    LOAD ALL CATEGORIES
+
+   All categories start together.
 ========================================= */
 
 async function loadWallpapers(){
 
     wallpapers = [];
 
-    loadingFinished = false;
 
+    const categoryPromises =
+        Object.entries(categories)
+        .map(
+            ([categoryKey, category]) => {
 
-    const grid =
-        document.getElementById(
-            "wallpaperGrid"
+                return loadCategory(
+                    categoryKey,
+                    category
+                );
+
+            }
         );
 
 
-    grid.innerHTML = `
-
-        <div class="empty">
-
-            Loading wallpapers...
-
-        </div>
-
-    `;
-
-
-    const requests = [];
-
-
-    /*
-       Load EVERY category at the same time.
-    */
-
-    for(
-        const categoryKey
-        of Object.keys(categories)
-    ){
-
-        requests.push(
-
-            loadCategory(
-                categoryKey,
-                categories[categoryKey]
-            )
-
-        );
-
-    }
-
-
-    await Promise.all(requests);
-
-
-    loadingFinished = true;
+    await Promise.all(
+        categoryPromises
+    );
 
 
     renderWallpapers();
-
 
 }
 
@@ -824,9 +791,12 @@ function renderWallpapers(){
         );
 
 
+    grid.innerHTML = "";
+
+
     const filtered =
         wallpapers.filter(
-            function(wallpaper){
+            wallpaper => {
 
                 const categoryMatch =
 
@@ -855,13 +825,23 @@ function renderWallpapers(){
 
 
     /*
-       Nothing loaded yet.
+       Nothing loaded yet
     */
 
     if(
         filtered.length === 0 &&
-        !loadingFinished
+        wallpapers.length === 0
     ){
+
+        grid.innerHTML = `
+
+            <div class="empty">
+
+                Loading wallpapers...
+
+            </div>
+
+        `;
 
         return;
 
@@ -869,14 +849,10 @@ function renderWallpapers(){
 
 
     /*
-       Loading is finished but
-       no wallpaper exists.
+       No result after loading
     */
 
-    if(
-        filtered.length === 0 &&
-        loadingFinished
-    ){
+    if(filtered.length === 0){
 
         grid.innerHTML = `
 
@@ -893,15 +869,12 @@ function renderWallpapers(){
     }
 
 
-    grid.innerHTML = "";
-
-
     /*
-       CREATE WALLPAPER CARDS
+       Create cards
     */
 
     filtered.forEach(
-        function(wallpaper){
+        wallpaper => {
 
             const card =
                 document.createElement(
@@ -909,7 +882,8 @@ function renderWallpapers(){
                 );
 
 
-            card.className = "card";
+            card.className =
+                "card";
 
 
             card.innerHTML = `
@@ -942,7 +916,7 @@ function renderWallpapers(){
 
 
             /*
-               DOWNLOAD BUTTON
+               Download button
             */
 
             const downloadButton =
@@ -987,7 +961,8 @@ function downloadWallpaper(
         );
 
 
-    link.href = image;
+    link.href =
+        image;
 
 
     link.download =
@@ -1021,7 +996,7 @@ document
         ".category-btn"
     )
     .forEach(
-        function(button){
+        button => {
 
             button.addEventListener(
                 "click",
@@ -1032,7 +1007,7 @@ document
                             ".category-btn"
                         )
                         .forEach(
-                            function(btn){
+                            btn => {
 
                                 btn.classList.remove(
                                     "active"
@@ -1073,7 +1048,7 @@ document
         function(){
 
             searchText =
-                this.value;
+                this.value.trim();
 
 
             renderWallpapers();
