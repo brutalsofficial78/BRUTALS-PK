@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRUTALS-PK — Owner Login</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    min-height:100vh;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#050509;
+    color:#fff;
+    position:relative;
+}
+
+.bg-glow{
+    position:absolute;
+    width:650px;
+    height:650px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(168,85,247,.20),transparent 65%);
+    filter:blur(20px);
+    animation:glowMove 7s ease-in-out infinite alternate;
+}
+
+.sprinkles{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+}
+
+.sprinkle{
+    position:absolute;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:#c084fc;
+    box-shadow:0 0 10px #a855f7;
+    opacity:.7;
+    animation:float linear infinite;
+}
+
+.panel{
+    width:min(440px,90%);
+    padding:42px 36px;
+    border:1px solid rgba(168,85,247,.28);
+    border-radius:24px;
+    background:rgba(10,7,18,.78);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.55),
+        0 0 45px rgba(168,85,247,.10);
+    position:relative;
+    z-index:2;
+    animation:panelIn .8s ease forwards;
+}
+
+.logo{
+    width:72px;
+    height:72px;
+    display:block;
+    margin:0 auto 20px;
+    border-radius:50%;
+    object-fit:cover;
+    box-shadow:0 0 25px rgba(168,85,247,.45);
+    animation:logoFloat 3s ease-in-out infinite;
+}
+
+.tag{
+    text-align:center;
+    color:#a855f7;
+    font-size:11px;
+    letter-spacing:4px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+h1{
+    text-align:center;
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#858591;
+    font-size:13px;
+    margin-bottom:30px;
+}
+
+.field{
+    margin-bottom:17px;
+}
+
+label{
+    display:block;
+    color:#aaaab5;
+    font-size:12px;
+    margin-bottom:8px;
+    letter-spacing:.5px;
+}
+
+input{
+    width:100%;
+    padding:14px 15px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.10);
+    outline:none;
+    background:rgba(255,255,255,.045);
+    color:white;
+    font-size:14px;
+    transition:.3s ease;
+}
+
+input:focus{
+    border-color:rgba(168,85,247,.65);
+    box-shadow:0 0 20px rgba(168,85,247,.12);
+    background:rgba(168,85,247,.06);
+}
+
+button{
+    width:100%;
+    border:0;
+    padding:14px;
+    border-radius:12px;
+    color:white;
+    font-weight:800;
+    font-size:14px;
+    cursor:pointer;
+    background:linear-gradient(135deg,#9333ea,#6d28d9);
+    box-shadow:0 10px 30px rgba(124,58,237,.25);
+    transition:.3s ease;
+}
+
+button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 40px rgba(124,58,237,.42);
+}
+
+.message{
+    min-height:20px;
+    text-align:center;
+    margin-top:16px;
+    color:#a855f7;
+    font-size:12px;
+}
+
+.back{
+    display:block;
+    width:max-content;
+    margin:22px auto 0;
+    color:#777;
+    text-decoration:none;
+    font-size:12px;
+    transition:.3s ease;
+}
+
+.back:hover{color:white}
+
+@keyframes panelIn{
+    from{opacity:0;transform:translateY(25px) scale(.97)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+@keyframes logoFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-7px)}
+}
+
+@keyframes glowMove{
+    from{transform:translate(-80px,-30px) scale(1)}
+    to{transform:translate(80px,40px) scale(1.15)}
+}
+
+@keyframes float{
+    0%{transform:translateY(110vh) translateX(0) rotate(0deg);opacity:0}
+    10%{opacity:.7}
+    50%{transform:translateY(50vh) translateX(45px) rotate(180deg)}
+    100%{transform:translateY(-10vh) translateX(-35px) rotate(360deg);opacity:0}
+}
+
+@media(max-width:500px){
+    .panel{padding:34px 23px}
+    h1{font-size:29px}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+<div class="sprinkles" id="sprinkles"></div>
+
+<div class="panel">
+    <img src="logo.png" alt="BRUTALS-PK" class="logo">
+
+    <div class="tag">OWNER ACCESS</div>
+    <h1>Owner Login</h1>
+    <p class="subtitle">Enter the owner credentials to continue.</p>
+
+    <form id="loginForm">
+        <div class="field">
+            <label for="username">LOGIN</label>
+            <input id="username" type="text" placeholder="Enter login" autocomplete="off" required>
+        </div>
+
+        <div class="field">
+            <label for="password">PASSWORD</label>
+            <input id="password" type="password" placeholder="Enter password" required>
+        </div>
+
+        <button type="submit">LOGIN</button>
+        <div class="message" id="message"></div>
+    </form>
+
+    <a href="index.html" class="back">← Back to BRUTALS-PK</a>
+</div>
+
+<script>
+const sprinkleBox = document.getElementById("sprinkles");
+
+for(let i=0;i<55;i++){
+    const s=document.createElement("span");
+    s.className="sprinkle";
+    s.style.left=Math.random()*100+"%";
+    s.style.animationDuration=(5+Math.random()*8)+"s";
+    s.style.animationDelay=(-Math.random()*10)+"s";
+    s.style.width=(2+Math.random()*4)+"px";
+    s.style.height=s.style.width;
+    sprinkleBox.appendChild(s);
+}
+
+document.getElementById("loginForm").addEventListener("submit",function(e){
+    e.preventDefault();
+
+    const login=document.getElementById("username").value;
+    const password=document.getElementById("password").value;
+    const message=document.getElementById("message");
+
+    if(login==="HAHA" && password==="2026"){
+        message.textContent="Login successful.";
+        message.style.color="#c084fc";
+        // Next owner-panel page/action can be added here later.
+    }else{
+        message.textContent="Invalid login or password.";
+        message.style.color="#b78cff";
+    }
+});
+</script>
+
+</body>
+</html>
