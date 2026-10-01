@@ -660,6 +660,154 @@
             }
         }
 
+        .ambient-particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: .55;
+            background-image:
+                radial-gradient(circle at 15% 25%, rgba(168,85,247,.28) 0 1px, transparent 2px),
+                radial-gradient(circle at 75% 20%, rgba(255,255,255,.16) 0 1px, transparent 2px),
+                radial-gradient(circle at 55% 75%, rgba(168,85,247,.20) 0 1px, transparent 2px),
+                radial-gradient(circle at 90% 70%, rgba(255,255,255,.12) 0 1px, transparent 2px);
+            background-size: 170px 170px, 230px 230px, 260px 260px, 190px 190px;
+            animation: particleDrift 18s linear infinite;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%,-50%);
+            background: radial-gradient(circle, rgba(168,85,247,.13), transparent 65%);
+            opacity: 0;
+            transition: opacity .25s ease;
+        }
+
+        @keyframes particleDrift {
+            from { transform: translate3d(0,0,0); }
+            50% { transform: translate3d(-20px,15px,0); }
+            to { transform: translate3d(0,0,0); }
+        }
+
+        /* =========================
+           REALISTIC INTERACTION EFFECTS
+        ========================= */
+
+        .navbar {
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .nav-button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-button::after {
+            content: "";
+            position: absolute;
+            left: 12%;
+            right: 12%;
+            bottom: 4px;
+            height: 2px;
+            transform: scaleX(0);
+            transform-origin: center;
+            background: #a855f7;
+            box-shadow: 0 0 10px #a855f7;
+            transition: transform .3s ease;
+        }
+
+        .nav-button:hover::after {
+            transform: scaleX(1);
+        }
+
+        .discord-button, .discord-hero {
+            border-color: rgba(168,85,247,.55);
+        }
+
+        .hero-logo {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block;
+            animation: realisticFloat 5s ease-in-out infinite, logoPulse 3.5s ease-in-out infinite;
+            will-change: transform, filter;
+        }
+
+        .hero h1 {
+            text-shadow: 0 0 12px rgba(168,85,247,.28), 0 0 34px rgba(168,85,247,.14);
+        }
+
+        .tool-card {
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: transform .18s ease, box-shadow .35s ease, border-color .35s ease;
+        }
+
+        .tool-card::after {
+            content: "";
+            position: absolute;
+            inset: -120% -40%;
+            background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.12) 50%, transparent 60%);
+            transform: translateX(-45%) rotate(8deg);
+            transition: transform .7s ease;
+            pointer-events: none;
+        }
+
+        .tool-card:hover::after {
+            transform: translateX(45%) rotate(8deg);
+        }
+
+        .card-icon {
+            transform: translateZ(24px);
+            transition: transform .3s ease, filter .3s ease;
+        }
+
+        .tool-card:hover .card-icon {
+            transform: translateZ(38px) scale(1.08);
+            filter: drop-shadow(0 0 12px rgba(168,85,247,.55));
+        }
+
+        .card-arrow {
+            transition: transform .3s ease;
+        }
+
+        .tool-card:hover .card-arrow {
+            transform: translateX(7px) translateZ(20px);
+        }
+
+        .scroll-hint {
+            animation: softBounce 2.2s ease-in-out infinite;
+        }
+
+        .hero-small {
+            animation: letterGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes realisticFloat {
+            0%,100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        @keyframes logoPulse {
+            0%,100% { filter: drop-shadow(0 0 8px rgba(168,85,247,.25)); }
+            50% { filter: drop-shadow(0 0 24px rgba(168,85,247,.55)); }
+        }
+
+        @keyframes softBounce {
+            0%,100% { transform: translateY(0); opacity: .7; }
+            50% { transform: translateY(6px); opacity: 1; }
+        }
+
+        @keyframes letterGlow {
+            0%,100% { opacity: .72; }
+            50% { opacity: 1; text-shadow: 0 0 12px rgba(168,85,247,.35); }
+        }
+
         /* =========================
            MOBILE
         ========================= */
@@ -740,10 +888,44 @@
                 transition-duration: 0.01ms !important;
             }
         }
+
+        /* =========================
+           SPRINKLES EFFECT
+        ========================= */
+
+        #sprinkles-container {
+            position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 9998;
+            transition: opacity .35s ease;
+        }
+        #sprinkles-container.soft { opacity: .28; }
+        .sprinkle {
+            position: absolute; width: 7px; height: 7px; border-radius: 50%;
+            background: rgba(196, 125, 255, .92);
+            box-shadow: 0 0 10px rgba(168,85,247,.8), 0 0 20px rgba(168,85,247,.35);
+            will-change: transform;
+        }
+        .effects-control {
+            position: fixed; right: 18px; bottom: 18px; z-index: 10000;
+            display:flex; flex-direction:column; align-items:stretch; gap:6px;
+            padding:9px; border:1px solid rgba(168,85,247,.35); border-radius:14px;
+            background:rgba(12,10,24,.82); backdrop-filter:blur(12px);
+            box-shadow:0 8px 30px rgba(0,0,0,.35); color:#eee; font-size:12px;
+        }
+        .effects-row { display:flex; align-items:center; gap:7px; justify-content:space-between; }
+        .effects-control button {
+            border:1px solid rgba(168,85,247,.5); background:rgba(168,85,247,.16);
+            color:#fff; border-radius:9px; padding:6px 9px; cursor:pointer; font-weight:700;
+        }
+        .effects-control button:hover { background:rgba(168,85,247,.32); }
+        .effects-control .hide-btn { font-size:11px; padding:4px 8px; width:100%; }
+        @media(max-width:600px){ .effects-control{right:10px;bottom:10px;} }
     </style>
-</head>
+<style>.extra-tools{max-width:1150px;margin:35px auto;padding:0 18px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.extra-tools .tool-card{cursor:pointer;padding:26px;border-radius:24px;background:rgba(14,18,38,.72);border:1px solid rgba(155,92,255,.25);backdrop-filter:blur(18px);transition:.3s}.extra-tools .tool-card:hover{transform:translateY(-7px);border-color:#9b5cff;box-shadow:0 20px 55px rgba(0,0,0,.35),0 0 30px rgba(155,92,255,.12)}.extra-tools .tool-icon{font-size:34px;margin-bottom:10px}.extra-tools h3{margin:0 0 7px}.extra-tools p{color:#aaa5b8;margin:0 0 15px}.extra-tools span{font-size:12px;font-weight:900;color:#b88cff}@media(max-width:650px){.extra-tools{grid-template-columns:1fr}}</style></head>
 
 <body>
+
+    <div class="ambient-particles" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
 
     <!-- =========================
          NAVBAR
@@ -770,8 +952,8 @@
                 Explore
             </a>
 
-            <a href="owner.html" class="nav-button">
-                Owner
+            <a href="https://discord.gg/nf4Nnz2FA" class="nav-button discord-button" target="_blank" rel="noopener noreferrer">
+                Discord
             </a>
 
         </div>
@@ -791,15 +973,15 @@
             class="hero-logo"
         >
 
-        <div class="hero-small">
+        <div class="hero-small" id="siteTaglineDisplay">
             GAMING & TOOLS HUB
         </div>
 
-        <h1>
+        <h1 id="siteNameDisplay">
             BRUTALS-PK
         </h1>
 
-        <p class="hero-description">
+        <p class="hero-description" id="siteDescriptionDisplay">
             Gaming tools, creative utilities and digital resources
             built for gamers and creators.
         </p>
@@ -814,10 +996,12 @@
             </a>
 
             <a
-                href="wallpaper.html"
-                class="secondary-button"
+                href="https://discord.gg/nf4Nnz2FA"
+                class="secondary-button discord-hero" id="heroDiscord"
+                target="_blank"
+                rel="noopener noreferrer"
             >
-                WALLPAPERS
+                DISCORD SERVER
             </a>
 
         </div>
@@ -832,6 +1016,11 @@
     <!-- =========================
          TOOLS
     ========================= -->
+
+    <div id="ownerAnnouncement" style="display:none;max-width:1100px;margin:0 auto 20px;padding:18px 22px;border:1px solid rgba(168,85,247,.25);border-radius:18px;background:rgba(20,20,35,.72);backdrop-filter:blur(14px);box-shadow:0 10px 35px rgba(0,0,0,.25);">
+        <strong id="announcementTitleDisplay" style="display:block;font-size:18px;margin-bottom:6px;"></strong>
+        <span id="announcementTextDisplay" style="color:#aaa;line-height:1.6;"></span>
+    </div>
 
     <section
         class="tools-section"
@@ -862,7 +1051,7 @@
 
             <a
                 href="sensitivity.html"
-                class="tool-card"
+                class="tool-card" id="toolSensitivity"
             >
 
                 <div class="card-icon">
@@ -889,7 +1078,7 @@
 
             <a
                 href="nickname.html"
-                class="tool-card"
+                class="tool-card" id="toolProfileMaker"
             >
 
                 <div class="card-icon">
@@ -912,11 +1101,38 @@
             </a>
 
 
+            <!-- Wallpapers -->
+
+            <a
+                href="wallpaper.html"
+                class="tool-card" id="toolWallpapers"
+            >
+
+                <div class="card-icon">
+                    🖼️
+                </div>
+
+                <h3>
+                    Wallpapers
+                </h3>
+
+                <p>
+                    Explore gaming, anime, dark, cars,
+                    aesthetic, 4K and Free Fire wallpapers.
+                </p>
+
+                <div class="card-arrow">
+                    →
+                </div>
+
+            </a>
+
+
             <!-- Profile Picture Maker -->
 
             <a
                 href="pfp-maker.html"
-                class="tool-card"
+                class="tool-card" id="toolPfp"
             >
 
                 <div class="card-icon">
@@ -939,46 +1155,49 @@
             </a>
 
 
-            <!-- More -->
+            <!-- Bio Generator -->
 
-            <div class="tool-card coming">
+            <a
+                href="bio-generator.html"
+                class="tool-card" id="toolBioGenerator"
+            >
 
-                <div class="card-icon">
-                    ✨
-                </div>
+                <div class="card-icon">📝</div>
 
-                <h3>
-                    More Tools
-                </h3>
+                <h3>Bio Generator</h3>
 
                 <p>
-                    More gaming and creative tools
-                    will be added here.
+                    Create stylish gaming bios with 150+
+                    ready-to-copy designs.
                 </p>
 
-                <span class="coming-badge">
-                    SOON
-                </span>
+                <div class="card-arrow">→</div>
 
-            </div>
+            </a>
+
+
+            <!-- Crosshair Maker -->
+
+            <a
+                href="crosshair-maker.html"
+                class="tool-card" id="toolCrosshair"
+            >
+
+                <div class="card-icon">🎯</div>
+
+                <h3>Crosshair Maker</h3>
+
+                <p>
+                    Design your own custom gaming crosshair
+                    with live preview and presets.
+                </p>
+
+                <div class="card-arrow">→</div>
+
+            </a>
+
 
         </div>
-
-    </section>
-
-
-    <!-- =========================
-         OWNER
-    ========================= -->
-
-    <section class="owner-section">
-
-        <a
-            href="owner.html"
-            class="owner-link"
-        >
-            ⚙ Owner Settings
-        </a>
 
     </section>
 
@@ -1038,7 +1257,150 @@
 
         });
 
+        // Smooth cursor glow
+        const cursorGlow = document.querySelector(".cursor-glow");
+        if (cursorGlow && window.matchMedia("(pointer:fine)").matches) {
+            window.addEventListener("pointermove", (e) => {
+                cursorGlow.style.left = e.clientX + "px";
+                cursorGlow.style.top = e.clientY + "px";
+                cursorGlow.style.opacity = "1";
+            });
+            window.addEventListener("pointerleave", () => cursorGlow.style.opacity = "0");
+        }
+
+        // Gentle 3D card tilt
+        if (window.matchMedia("(pointer:fine)").matches) {
+            document.querySelectorAll(".tool-card").forEach(card => {
+                card.addEventListener("pointermove", e => {
+                    const r = card.getBoundingClientRect();
+                    const x = (e.clientX - r.left) / r.width - .5;
+                    const y = (e.clientY - r.top) / r.height - .5;
+                    card.style.transform = `perspective(900px) rotateX(${-y*5}deg) rotateY(${x*5}deg) translateY(-7px)`;
+                });
+                card.addEventListener("pointerleave", () => {
+                    card.style.transform = "";
+                });
+            });
+        }
+
+        // Button press feedback
+        document.querySelectorAll("a, button").forEach(el => {
+            el.addEventListener("pointerdown", () => el.style.transform += " scale(.97)");
+            el.addEventListener("pointerup", () => setTimeout(() => el.style.transform = "", 120));
+            el.addEventListener("pointercancel", () => el.style.transform = "");
+        });
+
+
+        /* OWNER PANEL CONNECTION */
+        (function(){
+            const ls = localStorage;
+            const get = (k, d) => ls.getItem(k) ?? d;
+            const bool = (k, d=true) => ls.getItem(k) === null ? d : ls.getItem(k) === "true";
+
+            const name = get("siteName", "BRUTALS-PK");
+            const tagline = get("siteTagline", "Gaming & Tools Hub");
+            const desc = get("siteDescription", "Gaming tools, creative utilities and digital resources built for gamers and creators.");
+            document.getElementById("siteNameDisplay")?.replaceChildren(document.createTextNode(name));
+            document.getElementById("siteTaglineDisplay")?.replaceChildren(document.createTextNode(tagline));
+            document.getElementById("siteDescriptionDisplay")?.replaceChildren(document.createTextNode(desc));
+
+            const discordOn = bool("discordButton", true);
+            const discordUrl = get("discordLink", "https://discord.gg/nf4Nnz2FA");
+            document.querySelectorAll(".discord-button, .discord-hero").forEach(a=>{
+                a.href = discordUrl;
+                a.style.display = discordOn ? "" : "none";
+            });
+
+            const tools = [
+                ["toolSensitivity","tool_Sensitivity"],
+                ["toolProfileMaker","tool_Profile Maker"],
+                ["toolWallpapers","tool_Wallpapers"],
+                ["toolPfp","tool_Profile Picture Maker"]
+            ];
+            tools.forEach(([id,key])=>{
+                const el=document.getElementById(id);
+                if(el) el.style.display = bool(key,true) ? "" : "none";
+            });
+
+            const annOn = bool("announcementEnabled", false);
+            const ann = document.getElementById("ownerAnnouncement");
+            if(annOn && ann){
+                ann.style.display="block";
+                document.getElementById("announcementTitleDisplay").textContent=get("announcementTitle","🔥 New Update");
+                document.getElementById("announcementTextDisplay").textContent=get("announcementText","New wallpapers and tools are coming to BRUTALS-PK.");
+            }
+
+            const ownerInfo=document.getElementById("ownerPublicInfo");
+            const ownerName=get("ownerName","BRUTALS-PK Owner");
+            const ownerAbout=get("ownerAbout","Owner and creator of BRUTALS-PK.");
+            if(ownerInfo) ownerInfo.textContent = ownerName + " — " + ownerAbout;
+
+            if(bool("maintenance",false)){
+                const overlay=document.createElement("div");
+                overlay.style.cssText="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(5,5,10,.94);backdrop-filter:blur(12px);text-align:center;padding:25px;color:white;";
+                overlay.innerHTML='<div style="max-width:520px"><div style="font-size:50px">🛠️</div><h2 style="font-size:30px;margin:12px 0">Website Maintenance</h2><p style="color:#aaa">BRUTALS-PK is temporarily in maintenance mode. Please check back soon.</p></div>';
+                document.body.appendChild(overlay);
+            }
+
+            if(!bool("animations",true)){
+                const st=document.createElement("style");
+                st.textContent='*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}';
+                document.head.appendChild(st);
+            }
+        })();
     </script>
 
+    <div id="sprinkles-container" aria-hidden="true"></div>
+    <div class="effects-control">
+        <button class="hide-btn" id="hideEffects">◐ Hide / Light</button>
+        <div class="effects-row"><span>✨ Effects</span><button id="effectsToggle">ON</button></div>
+    </div>
+    <script>
+    (() => {
+      const box=document.getElementById('sprinkles-container');
+      const toggle=document.getElementById('effectsToggle');
+      const hide=document.getElementById('hideEffects');
+      const KEY='brutals_pk_effects';
+      const HIDE_KEY='brutals_pk_effects_light';
+      let dots=[], running=true, light=false, raf=0, last=performance.now();
+      const count=innerWidth<700?30:60;
+      function make(){
+        box.innerHTML=''; dots=[];
+        for(let i=0;i<count;i++){
+          const el=document.createElement('i'); el.className='sprinkle';
+          const d={el,x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+            vx:(Math.random()-.5)*.055, vy:.025+Math.random()*.075, s:Math.random()*.9+.45, phase:Math.random()*Math.PI*2};
+          el.style.width=el.style.height=(4+Math.random()*5)+'px';
+          box.appendChild(el); dots.push(d);
+        }
+      }
+      function frame(now){
+        const dt=Math.min(40,now-last); last=now;
+        if(running){
+          for(const d of dots){
+            d.x += d.vx*dt; d.y += d.vy*dt; d.phase += dt*.00045;
+            if(d.y>innerHeight+15) d.y=-15; if(d.x<-15)d.x=innerWidth+15; if(d.x>innerWidth+15)d.x=-15;
+            const sway=Math.sin(d.phase)*4;
+            d.el.style.transform=`translate3d(${d.x+sway}px,${d.y}px,0)`;
+          }
+        }
+        raf=requestAnimationFrame(frame);
+      }
+      function update(){
+        running=localStorage.getItem(KEY)!=='off';
+        toggle.textContent=running?'ON':'OFF';
+        toggle.setAttribute('aria-pressed',running);
+        box.style.display=running?'block':'none';
+      }
+      function updateLight(){
+        light=localStorage.getItem(HIDE_KEY)==='on'; box.classList.toggle('soft',light);
+        hide.textContent=light?'◑ Normal':'◐ Hide / Light';
+      }
+      toggle.onclick=()=>{ localStorage.setItem(KEY,running?'off':'on'); update(); if(running && !dots.length) make(); };
+      hide.onclick=()=>{ localStorage.setItem(HIDE_KEY,light?'off':'on'); updateLight(); };
+      make(); update(); updateLight();
+      raf=requestAnimationFrame(frame);
+    })();
+    </script>
 </body>
 </html>
