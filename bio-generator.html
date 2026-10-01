@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRUTALS PK — Bio Generator</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#050713;--panel:rgba(14,18,38,.72);--line:rgba(154,95,255,.25);--purple:#9b5cff;--text:#f7f3ff;--muted:#a9a5bb}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--text);background:
+radial-gradient(circle at 15% 10%,rgba(130,55,255,.20),transparent 30%),
+radial-gradient(circle at 85% 20%,rgba(40,110,255,.13),transparent 28%),var(--bg);
+min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:-30%;background:conic-gradient(from 0deg,transparent,rgba(155,92,255,.08),transparent 25%);animation:spin 22s linear infinite;pointer-events:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.top{max-width:1150px;margin:auto;padding:22px 18px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2}
+.logo{font-weight:900;letter-spacing:1px;font-size:23px}.logo span{color:#9b5cff}
+.back{color:white;text-decoration:none;border:1px solid var(--line);background:rgba(255,255,255,.05);padding:10px 15px;border-radius:13px}
+.hero{text-align:center;padding:45px 18px 25px;position:relative;z-index:1}
+.badge{display:inline-block;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:rgba(155,92,255,.08);color:#c9adff;font-size:12px;font-weight:800}
+h1{font-size:clamp(36px,7vw,72px);margin:16px 0 10px;line-height:1.02;letter-spacing:-2px}
+h1 span{color:var(--purple);text-shadow:0 0 35px rgba(155,92,255,.5)}
+.hero p{color:var(--muted);max-width:680px;margin:auto;line-height:1.6}
+.wrap{max-width:1150px;margin:auto;padding:18px;position:relative;z-index:1}
+.controls{background:var(--panel);border:1px solid var(--line);border-radius:25px;padding:20px;backdrop-filter:blur(20px);box-shadow:0 20px 70px rgba(0,0,0,.35)}
+.grid{display:grid;grid-template-columns:1.3fr 1fr 1fr auto;gap:12px}
+input,select,button{font:inherit}
+input,select{width:100%;padding:14px 15px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:#0a0d1d;color:white;outline:none}
+input:focus,select:focus{border-color:#9b5cff;box-shadow:0 0 0 3px rgba(155,92,255,.12)}
+button{border:0;cursor:pointer}
+.generate{padding:14px 20px;border-radius:14px;color:white;font-weight:900;background:linear-gradient(135deg,#8b4cff,#b16cff);box-shadow:0 10px 30px rgba(139,76,255,.3);transition:.25s}
+.generate:hover{transform:translateY(-2px);box-shadow:0 15px 40px rgba(139,76,255,.45)}
+.sectionbar{display:flex;justify-content:space-between;align-items:center;margin:28px 2px 14px}
+.sectionbar h2{font-size:20px}.sectionbar small{color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{position:relative;min-height:145px;padding:20px;border-radius:20px;border:1px solid rgba(155,92,255,.20);background:linear-gradient(145deg,rgba(18,22,45,.90),rgba(8,10,24,.88));overflow:hidden;transition:transform .3s, border-color .3s, box-shadow .3s;animation:rise .55s both}
+.card:after{content:"";position:absolute;inset:-100% -30%;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.10) 50%,transparent 58%);transform:translateX(-50%);transition:transform .8s}
+.card:hover{transform:translateY(-6px) scale(1.01);border-color:rgba(155,92,255,.6);box-shadow:0 18px 50px rgba(0,0,0,.35),0 0 30px rgba(155,92,255,.10)}
+.card:hover:after{transform:translateX(50%)}
+@keyframes rise{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+.num{color:#9b5cff;font-size:11px;font-weight:900;margin-bottom:12px}
+.bio{font-size:16px;line-height:1.55;white-space:pre-line;min-height:72px}
+.copy{position:absolute;right:15px;bottom:14px;padding:8px 12px;border-radius:10px;background:rgba(155,92,255,.14);color:#e7dcff;border:1px solid rgba(155,92,255,.28);font-size:12px;font-weight:800;transition:.2s}
+.copy:hover{background:#9b5cff;color:white;transform:translateY(-2px)}
+.copied{background:#18b981!important;color:white!important}
+.empty{padding:35px;text-align:center;color:var(--muted)}
+.toast{position:fixed;right:18px;bottom:18px;padding:13px 17px;border-radius:13px;background:#151a30;border:1px solid rgba(155,92,255,.35);box-shadow:0 15px 45px #0008;transform:translateY(100px);opacity:0;transition:.3s;z-index:20}
+.toast.show{transform:none;opacity:1}
+@media(max-width:800px){.grid{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.hero{padding-top:30px}h1{letter-spacing:-1px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">BRUTALS<span>-PK</span></div>
+  <a class="back" href="index.html">← Back</a>
+</header>
+<section class="hero">
+  <div class="badge">FREE FIRE • GAMING TOOL</div>
+  <h1>Bio <span>Generator</span></h1>
+  <p>Create stylish gaming bios instantly. Enter a name if you want — some bios automatically use it, while others stay clean without the name.</p>
+</section>
+<main class="wrap">
+  <section class="controls">
+    <div class="grid">
+      <input id="name" placeholder="Enter name (optional)" maxlength="22">
+      <select id="style">
+        <option value="all">All Styles</option>
+        <option value="royal">Royal</option>
+        <option value="dark">Dark</option>
+        <option value="pro">Pro Gamer</option>
+        <option value="attitude">Attitude</option>
+        <option value="simple">Clean</option>
+      </select>
+      <select id="section">
+        <option value="all">All Sections</option>
+        <option value="royal">Royal</option>
+        <option value="dark">Dark</option>
+        <option value="pro">Pro Gamer</option>
+        <option value="attitude">Attitude</option>
+        <option value="simple">Clean</option>
+      </select>
+      <button class="generate" onclick="generate()">Generate 30</button>
+    </div>
+  </section>
+  <div class="sectionbar"><h2 id="title">30 Fresh Bios</h2><small id="count"></small></div>
+  <section id="cards" class="cards"></section>
+</main>
+<div id="toast" class="toast">Copied!</div>
+<script>
+const sets={
+royal:[
+"👑 Born to lead, built to win.","♛ Quiet class. Loud results.","✨ Crown the grind, not the ego.","👑 Royal mindset, gamer soul.","⚜️ Respect earned, never requested.",
+"🏆 Dreams high. Standards higher.","♛ Rule your game, keep your peace.","👑 Class above chaos.","💎 Rare mindset, real goals.","✨ Walk in silence, shine in results.",
+"👑 Built different, staying humble.","🏆 Level up your name, not your ego.","♛ Calm face. Champion mindset.","💫 Greatness needs no announcement.","👑 Own the moment.",
+"💎 Simple style, royal mindset.","🏆 Play smart. Rise higher.","♛ No noise, just progress.","✨ Confidence with class.","👑 The grind wears a crown.",
+"⚜️ Respect the journey.","💫 Made for bigger stages.","👑 Goals first, applause later.","🏆 Winning starts in the mind.","♛ Keep it classy, keep it strong.",
+"💎 Not perfect, just improving.","✨ Shine without asking permission.","👑 Leader by mindset.","🏆 Built through patience.","♛ Stay rare."
+],
+dark:[
+"☾ Silent moves, heavy results.","🖤 No drama. Just the grind.","☠️ Cold mind, calm game.","🌑 Darkness hides noise, not skill.","🕶️ Low profile. High impact.",
+"🖤 Trust actions, not words.","☾ Alone with the mission.","⚫ Silence is part of the strategy.","🖤 Less talk, more levels.","🌑 Calm outside, focused inside.",
+"☠️ Fear fades when focus grows.","🕶️ Private grind, public results.","🖤 No shortcuts in the dark.","☾ Keep your circle quiet.","⚫ Mood: unbothered.",
+"🖤 Shadows move without warning.","🌑 Peace over pointless noise.","☠️ Built from patience.","🕶️ Stay hidden, stay ready.","🖤 The game remembers results.",
+"☾ Quiet but never inactive.","⚫ No need to explain everything.","🖤 Focus beats attention.","🌑 Deep focus, clean moves.","☠️ Pressure makes discipline.",
+"🕶️ Watch less. Build more.","🖤 Calm is a weapon of mindset.","☾ Midnight thoughts, daytime grind.","⚫ Different lane, same goal.","🖤 Silent level-up."
+],
+pro:[
+"🎮 Aim. Adapt. Improve.","⚡ Game on. Excuses off.","🎯 Practice turns pressure into skill.","🔥 Play smart, stay sharp.","⚡ One more match. One more level.",
+"🎮 Strategy before speed.","🎯 Precision over panic.","🔥 Built for clutch moments.","⚡ Focus locked.","🎮 Learn the map, master the game.",
+"🏆 Skill grows where practice stays.","🎯 Calm hands, clear decisions.","⚡ Fast mind, clean moves.","🔥 Every match teaches something.","🎮 Respect the game, improve daily.",
+"🎯 Position. Timing. Control.","⚡ Play clean, play focused.","🔥 Grind with a purpose.","🎮 Better aim starts with patience.","🏆 Progress is the real rank.",
+"🎯 Read the play, make the move.","⚡ Focus > luck.","🔥 Train. Play. Repeat.","🎮 Smart gameplay wins moments.","🏆 Keep learning every round.",
+"🎯 Control the pressure.","⚡ Precision is a habit.","🔥 No rush, just results.","🎮 Game sense matters.","🏆 Built by practice."
+],
+attitude:[
+"😈 My vibe, my rules.","🔥 Too focused to compete with noise.","⚡ Not here to impress.","🦅 I choose my own lane.","😎 Calm face, strong standards.",
+"🔥 Energy speaks louder than words.","⚡ Different mindset, different results.","😈 Keep watching, I keep improving.","🦅 No race, just my pace.","😎 Confidence without the noise.",
+"🔥 I know what I'm building.","⚡ No need for approval.","😈 Respect the vibe.","🦅 Independent by choice.","😎 Keep it real, keep it moving.",
+"🔥 Less comparison, more progress.","⚡ My journey, my timing.","😈 Quiet confidence hits different.","🦅 Focused on my own scoreboard.","😎 Built on self-belief.",
+"🔥 No fake energy.","⚡ Stay original.","😈 Mood: locked in.","🦅 Never copy the lane.","😎 Strong mind, clean vibe.",
+"🔥 Let results speak.","⚡ Own your style.","😈 Different is the point.","🦅 Stay fearless, stay kind.","😎 Keep moving forward."
+],
+simple:[
+"🎮 Gaming • Goals • Growth","✨ Good vibes. Better days.","⚡ Play. Learn. Repeat.","🌟 Creating my own story.","🎯 Focus on the next level.",
+"🎮 Just here to enjoy the game.","✨ Keep it simple.","⚡ Progress over perfection.","🌙 Peace, games, and goals.","🎯 Small steps, big dreams.",
+"🎮 Play with purpose.","✨ Stay positive, stay moving.","⚡ Make every level count.","🌟 Learning something new every day.","🎯 Focus. Improve. Repeat.",
+"🎮 Good game, good mood.","✨ Keep your energy clean.","⚡ Dreams need action.","🌙 Calm mind, clear goals.","🎯 One step at a time.",
+"🎮 Enjoy the journey.","✨ Better than yesterday.","⚡ Build, don't compare.","🌟 Stay curious.","🎯 Keep growing.",
+"🎮 Game time, goal time.","✨ Be real.","⚡ Make progress.","🌙 Choose peace.","🎯 Keep going."
+]};
+const all=Object.entries(sets).flatMap(([style,bios])=>bios.map(b=>({style,b})));
+const nameEl=document.getElementById("name"), styleEl=document.getElementById("style"), sectionEl=document.getElementById("section"), cards=document.getElementById("cards");
+function personalize(b,n){ if(!n)return b; const use=Math.random()>.48; return use ? b+"  • "+n : b; }
+function generate(){
+  let mode=sectionEl.value==="all"?styleEl.value:sectionEl.value;
+  let pool=mode==="all"?all:sets[mode].map(b=>({style:mode,b}));
+  // Fresh order every generation; no fixed same 30.
+  pool=[...pool].sort(()=>Math.random()-.5).slice(0,30);
+  const n=nameEl.value.trim();
+  cards.innerHTML="";
+  pool.forEach((x,i)=>{
+    const d=document.createElement("article"); d.className="card"; d.style.animationDelay=(i*35)+"ms";
+    d.innerHTML=`<div class="num">${String(i+1).padStart(2,"0")} • ${x.style.toUpperCase()}</div><div class="bio"></div><button class="copy">COPY</button>`;
+    d.querySelector(".bio").textContent=personalize(x.b,n);
+    const btn=d.querySelector(".copy");
+    btn.onclick=()=>{navigator.clipboard.writeText(d.querySelector(".bio").textContent).then(()=>{btn.textContent="COPIED ✓";btn.classList.add("copied");showToast("Bio copied!");setTimeout(()=>{btn.textContent="COPY";btn.classList.remove("copied")},1200)})};
+    cards.appendChild(d);
+  });
+  document.getElementById("title").textContent="30 Fresh Bios";
+  document.getElementById("count").textContent=pool.length+" ready to copy";
+}
+function showToast(t){const x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),1400)}
+generate();
+</script>
+</body>
+</html>
