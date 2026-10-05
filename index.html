@@ -1,1406 +1,706 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Browser Tab Title -->
-    <title>BRUTALS-PK — Gaming & Tools Hub</title>
-
-    <!-- Website Tab / Favicon Logo -->
-    <link rel="icon" type="image/png" href="logo.png">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #050509;
-            color: white;
-            overflow-x: hidden;
-        }
-
-        /* =========================
-           BACKGROUND
-        ========================= */
-
-        body::before {
-            content: "";
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            top: -180px;
-            left: -150px;
-            background: rgba(130, 40, 255, 0.15);
-            filter: blur(100px);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        body::after {
-            content: "";
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            bottom: -200px;
-            right: -150px;
-            background: rgba(90, 20, 255, 0.13);
-            filter: blur(110px);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* =========================
-           NAVBAR
-        ========================= */
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 72px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 7%;
-
-            background: rgba(5, 5, 9, 0.70);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-
-            border-bottom: 1px solid rgba(170, 90, 255, 0.15);
-
-            z-index: 1000;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-
-            text-decoration: none;
-            color: white;
-        }
-
-        .brand img {
-            width: 43px;
-            height: 43px;
-            object-fit: cover;
-            border-radius: 50%;
-
-            box-shadow:
-                0 0 12px rgba(160, 70, 255, 0.7);
-
-            animation: logoFloat 3s ease-in-out infinite;
-        }
-
-        .brand-name {
-            font-size: 19px;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        .brand-name span {
-            color: #a855f7;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .nav-button {
-            text-decoration: none;
-            color: #ddd;
-
-            padding: 9px 15px;
-
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 10px;
-
-            font-size: 13px;
-            transition: 0.3s ease;
-        }
-
-        .nav-button:hover {
-            color: white;
-            border-color: rgba(168,85,247,0.55);
-            background: rgba(168,85,247,0.10);
-            transform: translateY(-2px);
-        }
-
-        /* =========================
-           HERO
-        ========================= */
-
-        .hero {
-            min-height: 100vh;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            text-align: center;
-
-            padding: 130px 20px 90px;
-
-            position: relative;
-        }
-
-        .hero::before {
-            content: "";
-
-            position: absolute;
-
-            width: 600px;
-            height: 600px;
-
-            background: radial-gradient(
-                circle,
-                rgba(139, 48, 255, 0.20),
-                transparent 68%
-            );
-
-            top: 50%;
-            left: 50%;
-
-            transform: translate(-50%, -50%);
-
-            z-index: -1;
-        }
-
-        .hero-logo {
-            width: 150px;
-            height: 150px;
-
-            object-fit: cover;
-
-            border-radius: 50%;
-
-            margin-bottom: 25px;
-
-            box-shadow:
-                0 0 25px rgba(168, 85, 247, 0.45),
-                0 0 70px rgba(168, 85, 247, 0.18);
-
-            animation:
-                logoFloat 4s ease-in-out infinite,
-                logoAppear 1.2s ease forwards;
-
-            opacity: 0;
-        }
-
-        .hero-small {
-            font-size: 13px;
-            letter-spacing: 5px;
-            color: #a855f7;
-            font-weight: bold;
-
-            margin-bottom: 12px;
-
-            animation: fadeUp 0.9s ease 0.2s forwards;
-            opacity: 0;
-        }
-
-        .hero h1 {
-            font-size: clamp(48px, 9vw, 100px);
-
-            font-weight: 900;
-            letter-spacing: 3px;
-            line-height: 1;
-
-            background: linear-gradient(
-                90deg,
-                #ffffff,
-                #d8b4fe,
-                #9333ea,
-                #ffffff
-            );
-
-            background-size: 300% auto;
-
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-
-            animation:
-                gradientMove 5s linear infinite,
-                fadeUp 1s ease 0.35s forwards;
-
-            opacity: 0;
-
-            text-shadow: 0 0 35px rgba(168,85,247,0.15);
-        }
-
-        .hero-description {
-            margin-top: 25px;
-
-            max-width: 650px;
-
-            color: #a7a7b3;
-
-            font-size: 16px;
-            line-height: 1.7;
-
-            animation: fadeUp 1s ease 0.55s forwards;
-            opacity: 0;
-        }
-
-        .hero-buttons {
-            margin-top: 35px;
-
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-            justify-content: center;
-
-            animation: fadeUp 1s ease 0.75s forwards;
-            opacity: 0;
-        }
-
-        .primary-button,
-        .secondary-button {
-            text-decoration: none;
-
-            padding: 13px 23px;
-
-            border-radius: 12px;
-
-            font-weight: bold;
-            font-size: 14px;
-
-            transition: 0.3s ease;
-        }
-
-        .primary-button {
-            color: white;
-
-            background: linear-gradient(
-                135deg,
-                #9333ea,
-                #6d28d9
-            );
-
-            box-shadow:
-                0 8px 30px rgba(124,58,237,0.28);
-        }
-
-        .primary-button:hover {
-            transform: translateY(-4px);
-            box-shadow:
-                0 12px 40px rgba(124,58,237,0.45);
-        }
-
-        .secondary-button {
-            color: #ddd;
-
-            border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(255,255,255,0.03);
-        }
-
-        .secondary-button:hover {
-            transform: translateY(-4px);
-            border-color: rgba(168,85,247,0.5);
-            background: rgba(168,85,247,0.08);
-        }
-
-        .scroll-hint {
-            margin-top: 65px;
-
-            color: #777;
-            font-size: 12px;
-            letter-spacing: 3px;
-
-            animation:
-                fadeUp 1s ease 1s forwards,
-                bounce 2s ease-in-out 2s infinite;
-
-            opacity: 0;
-        }
-
-        /* =========================
-           TOOLS SECTION
-        ========================= */
-
-        .tools-section {
-            padding: 110px 7% 100px;
-
-            max-width: 1300px;
-            margin: auto;
-        }
-
-        .section-heading {
-            text-align: center;
-            margin-bottom: 55px;
-        }
-
-        .section-heading .mini {
-            color: #a855f7;
-            font-size: 12px;
-            letter-spacing: 4px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .section-heading h2 {
-            font-size: clamp(30px, 5vw, 48px);
-            margin-bottom: 12px;
-        }
-
-        .section-heading p {
-            color: #888894;
-            font-size: 14px;
-        }
-
-        /* =========================
-           CARDS
-        ========================= */
-
-        .tools-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, minmax(0, 1fr));
-
-            gap: 22px;
-        }
-
-        .tool-card {
-            position: relative;
-
-            padding: 30px;
-
-            min-height: 230px;
-
-            border-radius: 20px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.055),
-                    rgba(255,255,255,0.018)
-                );
-
-            border: 1px solid rgba(255,255,255,0.08);
-
-            overflow: hidden;
-
-            text-decoration: none;
-            color: white;
-
-            transform: translateY(35px);
-            opacity: 0;
-
-            transition:
-                transform 0.45s ease,
-                border-color 0.45s ease,
-                box-shadow 0.45s ease,
-                background 0.45s ease;
-        }
-
-        .tool-card.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .tool-card::before {
-            content: "";
-
-            position: absolute;
-
-            width: 170px;
-            height: 170px;
-
-            right: -80px;
-            bottom: -90px;
-
-            background: rgba(168,85,247,0.18);
-
-            filter: blur(35px);
-
-            border-radius: 50%;
-
-            transition: 0.5s ease;
-        }
-
-        .tool-card:hover {
-            transform: translateY(-8px) scale(1.015);
-
-            border-color: rgba(168,85,247,0.38);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(168,85,247,0.09),
-                    rgba(255,255,255,0.025)
-                );
-
-            box-shadow:
-                0 18px 50px rgba(0,0,0,0.35),
-                0 0 35px rgba(168,85,247,0.10);
-        }
-
-        .tool-card:hover::before {
-            transform: scale(1.5);
-            opacity: 0.8;
-        }
-
-        .card-icon {
-            width: 55px;
-            height: 55px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 15px;
-
-            background: rgba(168,85,247,0.10);
-
-            border: 1px solid rgba(168,85,247,0.20);
-
-            font-size: 27px;
-
-            margin-bottom: 22px;
-
-            transition: 0.4s ease;
-        }
-
-        .tool-card:hover .card-icon {
-            transform: rotate(-5deg) scale(1.08);
-
-            background: rgba(168,85,247,0.18);
-
-            box-shadow:
-                0 0 25px rgba(168,85,247,0.20);
-        }
-
-        .tool-card h3 {
-            font-size: 20px;
-            margin-bottom: 9px;
-        }
-
-        .tool-card p {
-            color: #8f8f9b;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .card-arrow {
-            position: absolute;
-
-            right: 25px;
-            bottom: 23px;
-
-            color: #a855f7;
-
-            font-size: 20px;
-
-            transition: 0.3s ease;
-        }
-
-        .tool-card:hover .card-arrow {
-            transform: translateX(5px);
-        }
-
-        .coming {
-            opacity: 0.65;
-        }
-
-        .coming-badge {
-            display: inline-block;
-
-            margin-top: 17px;
-
-            padding: 5px 9px;
-
-            border-radius: 20px;
-
-            font-size: 10px;
-            letter-spacing: 1px;
-
-            color: #b78cff;
-
-            background: rgba(168,85,247,0.08);
-
-            border: 1px solid rgba(168,85,247,0.15);
-        }
-
-        /* =========================
-           OWNER
-        ========================= */
-
-        .owner-section {
-            text-align: center;
-
-            padding: 20px 20px 90px;
-        }
-
-        .owner-link {
-            display: inline-block;
-
-            text-decoration: none;
-
-            color: #777;
-
-            font-size: 13px;
-
-            padding: 11px 18px;
-
-            border-radius: 10px;
-
-            border: 1px solid rgba(255,255,255,0.07);
-
-            transition: 0.3s ease;
-        }
-
-        .owner-link:hover {
-            color: white;
-
-            border-color: rgba(168,85,247,0.35);
-
-            background: rgba(168,85,247,0.06);
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            border-top: 1px solid rgba(255,255,255,0.06);
-
-            padding: 30px 20px;
-
-            text-align: center;
-
-            color: #666;
-
-            font-size: 12px;
-        }
-
-        footer strong {
-            color: #a855f7;
-        }
-
-        /* =========================
-           ANIMATIONS
-        ========================= */
-
-        @keyframes logoFloat {
-            0%, 100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
-        }
-
-        @keyframes logoAppear {
-            from {
-                opacity: 0;
-                transform: scale(0.7);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes gradientMove {
-            0% {
-                background-position: 0% center;
-            }
-
-            50% {
-                background-position: 100% center;
-            }
-
-            100% {
-                background-position: 0% center;
-            }
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(8px);
-            }
-        }
-
-        .ambient-particles {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: -1;
-            opacity: .55;
-            background-image:
-                radial-gradient(circle at 15% 25%, rgba(168,85,247,.28) 0 1px, transparent 2px),
-                radial-gradient(circle at 75% 20%, rgba(255,255,255,.16) 0 1px, transparent 2px),
-                radial-gradient(circle at 55% 75%, rgba(168,85,247,.20) 0 1px, transparent 2px),
-                radial-gradient(circle at 90% 70%, rgba(255,255,255,.12) 0 1px, transparent 2px);
-            background-size: 170px 170px, 230px 230px, 260px 260px, 190px 190px;
-            animation: particleDrift 18s linear infinite;
-        }
-
-        .cursor-glow {
-            position: fixed;
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%,-50%);
-            background: radial-gradient(circle, rgba(168,85,247,.13), transparent 65%);
-            opacity: 0;
-            transition: opacity .25s ease;
-        }
-
-        @keyframes particleDrift {
-            from { transform: translate3d(0,0,0); }
-            50% { transform: translate3d(-20px,15px,0); }
-            to { transform: translate3d(0,0,0); }
-        }
-
-        /* =========================
-           REALISTIC INTERACTION EFFECTS
-        ========================= */
-
-        .navbar {
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-        }
-
-        .nav-button {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-button::after {
-            content: "";
-            position: absolute;
-            left: 12%;
-            right: 12%;
-            bottom: 4px;
-            height: 2px;
-            transform: scaleX(0);
-            transform-origin: center;
-            background: #a855f7;
-            box-shadow: 0 0 10px #a855f7;
-            transition: transform .3s ease;
-        }
-
-        .nav-button:hover::after {
-            transform: scaleX(1);
-        }
-
-        .discord-button, .discord-hero {
-            border-color: rgba(168,85,247,.55);
-        }
-
-        .hero-logo {
-            opacity: 1 !important;
-            visibility: visible !important;
-            display: block;
-            animation: realisticFloat 5s ease-in-out infinite, logoPulse 3.5s ease-in-out infinite;
-            will-change: transform, filter;
-        }
-
-        .hero h1 {
-            text-shadow: 0 0 12px rgba(168,85,247,.28), 0 0 34px rgba(168,85,247,.14);
-        }
-
-        .tool-card {
-            transform-style: preserve-3d;
-            will-change: transform;
-            transition: transform .18s ease, box-shadow .35s ease, border-color .35s ease;
-        }
-
-        .tool-card::after {
-            content: "";
-            position: absolute;
-            inset: -120% -40%;
-            background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.12) 50%, transparent 60%);
-            transform: translateX(-45%) rotate(8deg);
-            transition: transform .7s ease;
-            pointer-events: none;
-        }
-
-        .tool-card:hover::after {
-            transform: translateX(45%) rotate(8deg);
-        }
-
-        .card-icon {
-            transform: translateZ(24px);
-            transition: transform .3s ease, filter .3s ease;
-        }
-
-        .tool-card:hover .card-icon {
-            transform: translateZ(38px) scale(1.08);
-            filter: drop-shadow(0 0 12px rgba(168,85,247,.55));
-        }
-
-        .card-arrow {
-            transition: transform .3s ease;
-        }
-
-        .tool-card:hover .card-arrow {
-            transform: translateX(7px) translateZ(20px);
-        }
-
-        .scroll-hint {
-            animation: softBounce 2.2s ease-in-out infinite;
-        }
-
-        .hero-small {
-            animation: letterGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes realisticFloat {
-            0%,100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(1deg); }
-        }
-
-        @keyframes logoPulse {
-            0%,100% { filter: drop-shadow(0 0 8px rgba(168,85,247,.25)); }
-            50% { filter: drop-shadow(0 0 24px rgba(168,85,247,.55)); }
-        }
-
-        @keyframes softBounce {
-            0%,100% { transform: translateY(0); opacity: .7; }
-            50% { transform: translateY(6px); opacity: 1; }
-        }
-
-        @keyframes letterGlow {
-            0%,100% { opacity: .72; }
-            50% { opacity: 1; text-shadow: 0 0 12px rgba(168,85,247,.35); }
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 900px) {
-
-            .tools-grid {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-            }
-
-            .navbar {
-                padding: 0 5%;
-            }
-        }
-
-        @media (max-width: 600px) {
-
-            .navbar {
-                height: 65px;
-            }
-
-            .brand img {
-                width: 38px;
-                height: 38px;
-            }
-
-            .brand-name {
-                font-size: 16px;
-            }
-
-            .nav-button {
-                display: none;
-            }
-
-            .hero {
-                padding-top: 115px;
-            }
-
-            .hero-logo {
-                width: 125px;
-                height: 125px;
-            }
-
-            .hero-description {
-                font-size: 14px;
-            }
-
-            .tools-section {
-                padding-left: 5%;
-                padding-right: 5%;
-            }
-
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .tool-card {
-                min-height: 210px;
-            }
-        }
-
-        /* =========================
-           REDUCED MOTION
-        ========================= */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            html {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* =========================
-           SPRINKLES EFFECT
-        ========================= */
-
-        #sprinkles-container {
-            position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 9998;
-            transition: opacity .35s ease;
-        }
-        #sprinkles-container.soft { opacity: .28; }
-        .sprinkle {
-            position: absolute; width: 7px; height: 7px; border-radius: 50%;
-            background: rgba(196, 125, 255, .92);
-            box-shadow: 0 0 10px rgba(168,85,247,.8), 0 0 20px rgba(168,85,247,.35);
-            will-change: transform;
-        }
-        .effects-control {
-            position: fixed; right: 18px; bottom: 18px; z-index: 10000;
-            display:flex; flex-direction:column; align-items:stretch; gap:6px;
-            padding:9px; border:1px solid rgba(168,85,247,.35); border-radius:14px;
-            background:rgba(12,10,24,.82); backdrop-filter:blur(12px);
-            box-shadow:0 8px 30px rgba(0,0,0,.35); color:#eee; font-size:12px;
-        }
-        .effects-row { display:flex; align-items:center; gap:7px; justify-content:space-between; }
-        .effects-control button {
-            border:1px solid rgba(168,85,247,.5); background:rgba(168,85,247,.16);
-            color:#fff; border-radius:9px; padding:6px 9px; cursor:pointer; font-weight:700;
-        }
-        .effects-control button:hover { background:rgba(168,85,247,.32); }
-        .effects-control .hide-btn { font-size:11px; padding:4px 8px; width:100%; }
-        @media(max-width:600px){ .effects-control{right:10px;bottom:10px;} }
-    </style>
-<style>.extra-tools{max-width:1150px;margin:35px auto;padding:0 18px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.extra-tools .tool-card{cursor:pointer;padding:26px;border-radius:24px;background:rgba(14,18,38,.72);border:1px solid rgba(155,92,255,.25);backdrop-filter:blur(18px);transition:.3s}.extra-tools .tool-card:hover{transform:translateY(-7px);border-color:#9b5cff;box-shadow:0 20px 55px rgba(0,0,0,.35),0 0 30px rgba(155,92,255,.12)}.extra-tools .tool-icon{font-size:34px;margin-bottom:10px}.extra-tools h3{margin:0 0 7px}.extra-tools p{color:#aaa5b8;margin:0 0 15px}.extra-tools span{font-size:12px;font-weight:900;color:#b88cff}@media(max-width:650px){.extra-tools{grid-template-columns:1fr}}</style></head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRUTALS PK</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    min-height:100vh;
+    color:#fff;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(123,47,255,.18), transparent 28%),
+        radial-gradient(circle at 80% 70%, rgba(76,0,255,.14), transparent 30%),
+        linear-gradient(135deg,#05010d,#0b0318 45%,#030008);
+    overflow-x:hidden;
+}
+
+/* =========================
+   RANDOM SPRINKLES
+========================= */
+
+#sprinkles{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+}
+
+.sprinkle{
+    position:absolute;
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#b56cff;
+    box-shadow:
+        0 0 7px #9d4edd,
+        0 0 15px rgba(181,108,255,.8);
+    opacity:.75;
+    animation:floatSprinkle linear infinite;
+}
+
+@keyframes floatSprinkle{
+    0%{
+        transform:translate3d(0,110vh,0) scale(.5);
+        opacity:0;
+    }
+
+    10%{
+        opacity:.8;
+    }
+
+    50%{
+        transform:translate3d(30px,50vh,0) scale(1);
+    }
+
+    90%{
+        opacity:.7;
+    }
+
+    100%{
+        transform:translate3d(-35px,-10vh,0) scale(.4);
+        opacity:0;
+    }
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+    position:relative;
+    z-index:5;
+    width:100%;
+    padding:20px 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:rgba(5,1,13,.55);
+    backdrop-filter:blur(15px);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:900;
+    letter-spacing:1px;
+    color:#fff;
+    text-shadow:0 0 15px rgba(165,90,255,.8);
+}
+
+.nav-right{
+    display:flex;
+    gap:12px;
+}
+
+.nav-btn{
+    text-decoration:none;
+    color:#fff;
+    padding:10px 18px;
+    border-radius:12px;
+    border:1px solid rgba(181,108,255,.35);
+    background:rgba(255,255,255,.05);
+    transition:.3s;
+    font-weight:700;
+}
+
+.nav-btn:hover{
+    transform:translateY(-2px);
+    background:rgba(155,65,255,.2);
+    box-shadow:0 0 20px rgba(155,65,255,.3);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    position:relative;
+    z-index:2;
+    min-height:560px;
+    padding:75px 20px 65px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.profile-wrap{
+    width:145px;
+    height:145px;
+    border-radius:50%;
+    padding:5px;
+    background:linear-gradient(135deg,#8d3cff,#d58cff,#641bff);
+    box-shadow:
+        0 0 25px rgba(142,52,255,.7),
+        0 0 65px rgba(142,52,255,.25);
+    animation:profileFloat 4s ease-in-out infinite;
+}
+
+.profile-wrap img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+    display:block;
+    background:#10051b;
+}
+
+@keyframes profileFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+.hero h1{
+    margin-top:30px;
+    font-size:clamp(48px,8vw,88px);
+    font-weight:1000;
+    letter-spacing:-3px;
+    background:linear-gradient(90deg,#fff,#c988ff,#fff);
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow{
+    0%,100%{
+        filter:drop-shadow(0 0 8px rgba(176,83,255,.3));
+    }
+    50%{
+        filter:drop-shadow(0 0 25px rgba(176,83,255,.8));
+    }
+}
+
+.hero p{
+    margin-top:12px;
+    max-width:650px;
+    color:#bdb4ca;
+    font-size:17px;
+    line-height:1.7;
+}
+
+.hero-buttons{
+    margin-top:30px;
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.main-btn{
+    position:relative;
+    overflow:hidden;
+    text-decoration:none;
+    color:#fff;
+    font-weight:800;
+    padding:14px 25px;
+    border-radius:14px;
+    border:1px solid rgba(184,103,255,.5);
+    background:linear-gradient(135deg,#6f25d9,#3c1187);
+    box-shadow:0 10px 30px rgba(92,28,180,.25);
+    transition:.3s;
+}
+
+.main-btn:hover{
+    transform:translateY(-4px) scale(1.02);
+    box-shadow:0 15px 35px rgba(130,40,255,.4);
+}
+
+.main-btn.discord{
+    background:linear-gradient(135deg,#5865f2,#3139a8);
+}
+
+/* =========================
+   TOOLS
+========================= */
+
+.tools-section{
+    position:relative;
+    z-index:2;
+    padding:20px 7% 90px;
+}
+
+.section-title{
+    text-align:center;
+    font-size:38px;
+    font-weight:900;
+    margin-bottom:10px;
+}
+
+.section-subtitle{
+    text-align:center;
+    color:#958aa3;
+    margin-bottom:40px;
+}
+
+.tools-grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.tool-card{
+    position:relative;
+    overflow:hidden;
+    min-height:220px;
+    padding:30px;
+    border-radius:22px;
+    border:1px solid rgba(184,103,255,.18);
+    background:
+        linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
+    backdrop-filter:blur(15px);
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+    transition:.4s;
+}
+
+.tool-card::before{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    top:-100px;
+    right:-80px;
+    background:rgba(143,54,255,.14);
+    filter:blur(5px);
+    transition:.5s;
+}
+
+.tool-card::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:70%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.08),
+        transparent
+    );
+    transform:skewX(-20deg);
+    transition:.7s;
+}
+
+.tool-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(185,103,255,.5);
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.4),
+        0 0 25px rgba(137,45,255,.15);
+}
+
+.tool-card:hover::after{
+    left:140%;
+}
+
+.tool-icon{
+    width:58px;
+    height:58px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    background:linear-gradient(135deg,#7228df,#3c117e);
+    box-shadow:0 0 20px rgba(137,45,255,.25);
+    font-size:27px;
+    margin-bottom:20px;
+}
+
+.tool-card h3{
+    font-size:23px;
+    margin-bottom:10px;
+}
+
+.tool-card p{
+    color:#a99fb3;
+    line-height:1.6;
+    font-size:14px;
+    min-height:45px;
+}
+
+.tool-link{
+    display:inline-block;
+    margin-top:20px;
+    color:#c78aff;
+    text-decoration:none;
+    font-weight:800;
+    transition:.3s;
+}
+
+.tool-link:hover{
+    color:#fff;
+    transform:translateX(4px);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    position:relative;
+    z-index:2;
+    padding:25px;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.07);
+    color:#756b80;
+    background:rgba(0,0,0,.2);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+    .tools-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .navbar{
+        padding:17px 5%;
+    }
+
+    .logo{
+        font-size:21px;
+    }
+
+    .nav-right{
+        gap:7px;
+    }
+
+    .nav-btn{
+        padding:8px 11px;
+        font-size:12px;
+    }
+
+    .hero{
+        min-height:520px;
+        padding-top:55px;
+    }
+
+    .profile-wrap{
+        width:120px;
+        height:120px;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .hero p{
+        font-size:14px;
+        padding:0 10px;
+    }
+
+    .tools-section{
+        padding-left:5%;
+        padding-right:5%;
+    }
+
+    .tools-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-title{
+        font-size:31px;
+    }
+}
+</style>
+</head>
 
 <body>
 
-    <div class="ambient-particles" aria-hidden="true"></div>
-    <div class="cursor-glow" aria-hidden="true"></div>
+<!-- RANDOM SPRINKLES - ALWAYS ON -->
+<div id="sprinkles"></div>
 
-    <!-- =========================
-         NAVBAR
-    ========================= -->
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">BRUTALS PK</div>
 
-    <nav class="navbar">
+    <div class="nav-right">
+        <a href="#tools" class="nav-btn">Explore</a>
 
-        <a href="index.html" class="brand">
+        <a
+            href="https://discord.gg/nf4Nnz2FA"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="nav-btn"
+        >
+            Discord
+        </a>
+    </div>
+</nav>
 
-            <img
-                src="logo.png"
-                alt="BRUTALS-PK Logo"
-            >
 
-            <div class="brand-name">
-                BRUTALS<span>-PK</span>
-            </div>
+<!-- HERO -->
+<section class="hero">
 
+    <!--
+        IMPORTANT:
+        Apni purani DP/logo image ka naam agar alag hai
+        to neeche src="..." mein apni image ka filename likh dena.
+    -->
+    <div class="profile-wrap">
+        <img src="logo.png" alt="BRUTALS PK">
+    </div>
+
+    <h1>BRUTALS PK</h1>
+
+    <p>
+        Premium tools, wallpapers, profile makers and gaming utilities
+        — all in one place.
+    </p>
+
+    <div class="hero-buttons">
+
+        <a href="#tools" class="main-btn">
+            Explore Tools
         </a>
 
-        <div class="nav-right">
-
-            <a href="#tools" class="nav-button">
-                Explore
-            </a>
-
-            <a href="https://discord.gg/nf4Nnz2FA" class="nav-button discord-button" target="_blank" rel="noopener noreferrer">
-                Discord
-            </a>
-
-        </div>
-
-    </nav>
-
-
-    <!-- =========================
-         HERO
-    ========================= -->
-
-    <section class="hero">
-
-        <img
-            src="logo.png"
-            alt="BRUTALS-PK"
-            class="hero-logo"
+        <a
+            href="https://discord.gg/nf4Nnz2FA"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="main-btn discord"
         >
+            Discord Server
+        </a>
 
-        <div class="hero-small" id="siteTaglineDisplay">
-            GAMING & TOOLS HUB
-        </div>
-
-        <h1 id="siteNameDisplay">
-            BRUTALS-PK
-        </h1>
-
-        <p class="hero-description" id="siteDescriptionDisplay">
-            Gaming tools, creative utilities and digital resources
-            built for gamers and creators.
-        </p>
-
-        <div class="hero-buttons">
-
-            <a
-                href="#tools"
-                class="primary-button"
-            >
-                EXPLORE TOOLS
-            </a>
-
-            <a
-                href="https://discord.gg/nf4Nnz2FA"
-                class="secondary-button discord-hero" id="heroDiscord"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                DISCORD SERVER
-            </a>
-
-        </div>
-
-        <div class="scroll-hint">
-            SCROLL TO EXPLORE ↓
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         TOOLS
-    ========================= -->
-
-    <div id="ownerAnnouncement" style="display:none;max-width:1100px;margin:0 auto 20px;padding:18px 22px;border:1px solid rgba(168,85,247,.25);border-radius:18px;background:rgba(20,20,35,.72);backdrop-filter:blur(14px);box-shadow:0 10px 35px rgba(0,0,0,.25);">
-        <strong id="announcementTitleDisplay" style="display:block;font-size:18px;margin-bottom:6px;"></strong>
-        <span id="announcementTextDisplay" style="color:#aaa;line-height:1.6;"></span>
     </div>
 
-    <section
-        class="tools-section"
-        id="tools"
-    >
+</section>
 
-        <div class="section-heading">
 
-            <div class="mini">
-                BRUTALS-PK
-            </div>
+<!-- TOOLS -->
+<section class="tools-section" id="tools">
 
-            <h2>
-                ⚡ Explore Tools
-            </h2>
+    <h2 class="section-title">Explore Tools</h2>
+
+    <p class="section-subtitle">
+        Everything you need, built into BRUTALS PK.
+    </p>
+
+
+    <div class="tools-grid">
+
+        <!-- Sensitivity -->
+        <div class="tool-card">
+
+            <div class="tool-icon">🎯</div>
+
+            <h3>Sensitivity</h3>
 
             <p>
-                Choose a tool and start creating.
+                Find and explore mobile sensitivity settings
+                for your gameplay.
             </p>
 
+            <a href="sensitivity.html" class="tool-link">
+                Open Tool →
+            </a>
+
         </div>
 
 
-        <div class="tools-grid">
+        <!-- Profile Maker -->
+        <div class="tool-card">
 
+            <div class="tool-icon">✍️</div>
 
-            <!-- Sensitivity -->
+            <h3>Profile Maker</h3>
 
-            <a
-                href="sensitivity.html"
-                class="tool-card" id="toolSensitivity"
-            >
+            <p>
+                Create stylish profiles and customize your
+                profile text.
+            </p>
 
-                <div class="card-icon">
-                    🎮
-                </div>
-
-                <h3>
-                    Sensitivity
-                </h3>
-
-                <p>
-                    Find Free Fire sensitivity settings
-                    for your mobile device.
-                </p>
-
-                <div class="card-arrow">
-                    →
-                </div>
-
+            <a href="nickname.html" class="tool-link">
+                Open Tool →
             </a>
-
-
-            <!-- Profile Maker -->
-
-            <a
-                href="nickname.html"
-                class="tool-card" id="toolProfileMaker"
-            >
-
-                <div class="card-icon">
-                    🎨
-                </div>
-
-                <h3>
-                    Profile Maker
-                </h3>
-
-                <p>
-                    Create stylish gaming names
-                    and profile designs.
-                </p>
-
-                <div class="card-arrow">
-                    →
-                </div>
-
-            </a>
-
-
-            <!-- Wallpapers -->
-
-            <a
-                href="wallpaper.html"
-                class="tool-card" id="toolWallpapers"
-            >
-
-                <div class="card-icon">
-                    🖼️
-                </div>
-
-                <h3>
-                    Wallpapers
-                </h3>
-
-                <p>
-                    Explore gaming, anime, dark, cars,
-                    aesthetic, 4K and Free Fire wallpapers.
-                </p>
-
-                <div class="card-arrow">
-                    →
-                </div>
-
-            </a>
-
-
-            <!-- Profile Picture Maker -->
-
-            <a
-                href="pfp-maker.html"
-                class="tool-card" id="toolPfp"
-            >
-
-                <div class="card-icon">
-                    🖼️
-                </div>
-
-                <h3>
-                    Profile Picture Maker
-                </h3>
-
-                <p>
-                    Create your own gaming profile picture
-                    with photos, text, glow and effects.
-                </p>
-
-                <div class="card-arrow">
-                    →
-                </div>
-
-            </a>
-
-
-            <!-- Bio Generator -->
-
-            <a
-                href="bio-generator.html"
-                class="tool-card" id="toolBioGenerator"
-            >
-
-                <div class="card-icon">📝</div>
-
-                <h3>Bio Generator</h3>
-
-                <p>
-                    Create stylish gaming bios with 150+
-                    ready-to-copy designs.
-                </p>
-
-                <div class="card-arrow">→</div>
-
-            </a>
-
-
-            <!-- Crosshair Maker -->
-
-            <a
-                href="crosshair-maker.html"
-                class="tool-card" id="toolCrosshair"
-            >
-
-                <div class="card-icon">🎯</div>
-
-                <h3>Crosshair Maker</h3>
-
-                <p>
-                    Design your own custom gaming crosshair
-                    with live preview and presets.
-                </p>
-
-                <div class="card-arrow">→</div>
-
-            </a>
-
 
         </div>
 
-    </section>
+
+        <!-- Wallpapers -->
+        <div class="tool-card">
+
+            <div class="tool-icon">🖼️</div>
+
+            <h3>Wallpapers</h3>
+
+            <p>
+                Browse gaming, anime, cars, dark, aesthetic,
+                4K and Free Fire wallpapers.
+            </p>
+
+            <a href="wallpaper.html" class="tool-link">
+                Open Tool →
+            </a>
+
+        </div>
 
 
-    <!-- =========================
-         FOOTER
-    ========================= -->
+        <!-- PFP Maker -->
+        <div class="tool-card">
 
-    <footer>
+            <div class="tool-icon">👤</div>
 
-        © 2026
-        <strong>BRUTALS-PK</strong>
-        — Gaming & Tools Hub
+            <h3>Profile Picture Maker</h3>
 
-    </footer>
+            <p>
+                Make your own stylish profile picture with
+                custom text and effects.
+            </p>
 
+            <a href="pfp-maker.html" class="tool-link">
+                Open Tool →
+            </a>
 
-    <!-- =========================
-         SMOOTH CARD ANIMATION
-    ========================= -->
-
-    <script>
-
-        const cards = document.querySelectorAll(".tool-card");
-
-        const observer = new IntersectionObserver(
-
-            (entries) => {
-
-                entries.forEach((entry) => {
-
-                    if (entry.isIntersecting) {
-
-                        entry.target.classList.add("show");
-
-                        observer.unobserve(entry.target);
-
-                    }
-
-                });
-
-            },
-
-            {
-                threshold: 0.12
-            }
-
-        );
+        </div>
 
 
-        cards.forEach((card, index) => {
+        <!-- Bio Generator -->
+        <div class="tool-card">
 
-            card.style.transitionDelay =
-                `${index * 0.08}s`;
+            <div class="tool-icon">📝</div>
 
-            observer.observe(card);
+            <h3>Bio Generator</h3>
 
-        });
+            <p>
+                Generate stylish Royal, Dark, Gamer,
+                Attitude and Clean bios.
+            </p>
 
-        // Smooth cursor glow
-        const cursorGlow = document.querySelector(".cursor-glow");
-        if (cursorGlow && window.matchMedia("(pointer:fine)").matches) {
-            window.addEventListener("pointermove", (e) => {
-                cursorGlow.style.left = e.clientX + "px";
-                cursorGlow.style.top = e.clientY + "px";
-                cursorGlow.style.opacity = "1";
-            });
-            window.addEventListener("pointerleave", () => cursorGlow.style.opacity = "0");
-        }
+            <a href="biogenerator.html" class="tool-link">
+                Open Tool →
+            </a>
 
-        // Gentle 3D card tilt
-        if (window.matchMedia("(pointer:fine)").matches) {
-            document.querySelectorAll(".tool-card").forEach(card => {
-                card.addEventListener("pointermove", e => {
-                    const r = card.getBoundingClientRect();
-                    const x = (e.clientX - r.left) / r.width - .5;
-                    const y = (e.clientY - r.top) / r.height - .5;
-                    card.style.transform = `perspective(900px) rotateX(${-y*5}deg) rotateY(${x*5}deg) translateY(-7px)`;
-                });
-                card.addEventListener("pointerleave", () => {
-                    card.style.transform = "";
-                });
-            });
-        }
-
-        // Button press feedback
-        document.querySelectorAll("a, button").forEach(el => {
-            el.addEventListener("pointerdown", () => el.style.transform += " scale(.97)");
-            el.addEventListener("pointerup", () => setTimeout(() => el.style.transform = "", 120));
-            el.addEventListener("pointercancel", () => el.style.transform = "");
-        });
+        </div>
 
 
-        /* OWNER PANEL CONNECTION */
-        (function(){
-            const ls = localStorage;
-            const get = (k, d) => ls.getItem(k) ?? d;
-            const bool = (k, d=true) => ls.getItem(k) === null ? d : ls.getItem(k) === "true";
+        <!-- Crosshair Maker -->
+        <div class="tool-card">
 
-            const name = get("siteName", "BRUTALS-PK");
-            const tagline = get("siteTagline", "Gaming & Tools Hub");
-            const desc = get("siteDescription", "Gaming tools, creative utilities and digital resources built for gamers and creators.");
-            document.getElementById("siteNameDisplay")?.replaceChildren(document.createTextNode(name));
-            document.getElementById("siteTaglineDisplay")?.replaceChildren(document.createTextNode(tagline));
-            document.getElementById("siteDescriptionDisplay")?.replaceChildren(document.createTextNode(desc));
+            <div class="tool-icon">⊕</div>
 
-            const discordOn = bool("discordButton", true);
-            const discordUrl = get("discordLink", "https://discord.gg/nf4Nnz2FA");
-            document.querySelectorAll(".discord-button, .discord-hero").forEach(a=>{
-                a.href = discordUrl;
-                a.style.display = discordOn ? "" : "none";
-            });
+            <h3>Crosshair Maker</h3>
 
-            const tools = [
-                ["toolSensitivity","tool_Sensitivity"],
-                ["toolProfileMaker","tool_Profile Maker"],
-                ["toolWallpapers","tool_Wallpapers"],
-                ["toolPfp","tool_Profile Picture Maker"]
-            ];
-            tools.forEach(([id,key])=>{
-                const el=document.getElementById(id);
-                if(el) el.style.display = bool(key,true) ? "" : "none";
-            });
+            <p>
+                Create and customize your own crosshair
+                with different styles and colors.
+            </p>
 
-            const annOn = bool("announcementEnabled", false);
-            const ann = document.getElementById("ownerAnnouncement");
-            if(annOn && ann){
-                ann.style.display="block";
-                document.getElementById("announcementTitleDisplay").textContent=get("announcementTitle","🔥 New Update");
-                document.getElementById("announcementTextDisplay").textContent=get("announcementText","New wallpapers and tools are coming to BRUTALS-PK.");
-            }
+            <a href="crosshair.html" class="tool-link">
+                Open Tool →
+            </a>
 
-            const ownerInfo=document.getElementById("ownerPublicInfo");
-            const ownerName=get("ownerName","BRUTALS-PK Owner");
-            const ownerAbout=get("ownerAbout","Owner and creator of BRUTALS-PK.");
-            if(ownerInfo) ownerInfo.textContent = ownerName + " — " + ownerAbout;
+        </div>
 
-            if(bool("maintenance",false)){
-                const overlay=document.createElement("div");
-                overlay.style.cssText="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(5,5,10,.94);backdrop-filter:blur(12px);text-align:center;padding:25px;color:white;";
-                overlay.innerHTML='<div style="max-width:520px"><div style="font-size:50px">🛠️</div><h2 style="font-size:30px;margin:12px 0">Website Maintenance</h2><p style="color:#aaa">BRUTALS-PK is temporarily in maintenance mode. Please check back soon.</p></div>';
-                document.body.appendChild(overlay);
-            }
-
-            if(!bool("animations",true)){
-                const st=document.createElement("style");
-                st.textContent='*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}';
-                document.head.appendChild(st);
-            }
-        })();
-    </script>
-
-    <div id="sprinkles-container" aria-hidden="true"></div>
-    <div class="effects-control">
-        <button class="hide-btn" id="hideEffects">◐ Hide / Light</button>
-        <div class="effects-row"><span>✨ Effects</span><button id="effectsToggle">ON</button></div>
     </div>
-    <script>
-    (() => {
-      const box=document.getElementById('sprinkles-container');
-      const toggle=document.getElementById('effectsToggle');
-      const hide=document.getElementById('hideEffects');
-      const KEY='brutals_pk_effects';
-      const HIDE_KEY='brutals_pk_effects_light';
-      let dots=[], running=true, light=false, raf=0, last=performance.now();
-      const count=innerWidth<700?30:60;
-      function make(){
-        box.innerHTML=''; dots=[];
-        for(let i=0;i<count;i++){
-          const el=document.createElement('i'); el.className='sprinkle';
-          const d={el,x:Math.random()*innerWidth,y:Math.random()*innerHeight,
-            vx:(Math.random()-.5)*.055, vy:.025+Math.random()*.075, s:Math.random()*.9+.45, phase:Math.random()*Math.PI*2};
-          el.style.width=el.style.height=(4+Math.random()*5)+'px';
-          box.appendChild(el); dots.push(d);
-        }
-      }
-      function frame(now){
-        const dt=Math.min(40,now-last); last=now;
-        if(running){
-          for(const d of dots){
-            d.x += d.vx*dt; d.y += d.vy*dt; d.phase += dt*.00045;
-            if(d.y>innerHeight+15) d.y=-15; if(d.x<-15)d.x=innerWidth+15; if(d.x>innerWidth+15)d.x=-15;
-            const sway=Math.sin(d.phase)*4;
-            d.el.style.transform=`translate3d(${d.x+sway}px,${d.y}px,0)`;
-          }
-        }
-        raf=requestAnimationFrame(frame);
-      }
-      function update(){
-        running=localStorage.getItem(KEY)!=='off';
-        toggle.textContent=running?'ON':'OFF';
-        toggle.setAttribute('aria-pressed',running);
-        box.style.display=running?'block':'none';
-      }
-      function updateLight(){
-        light=localStorage.getItem(HIDE_KEY)==='on'; box.classList.toggle('soft',light);
-        hide.textContent=light?'◑ Normal':'◐ Hide / Light';
-      }
-      toggle.onclick=()=>{ localStorage.setItem(KEY,running?'off':'on'); update(); if(running && !dots.length) make(); };
-      hide.onclick=()=>{ localStorage.setItem(HIDE_KEY,light?'off':'on'); updateLight(); };
-      make(); update(); updateLight();
-      raf=requestAnimationFrame(frame);
-    })();
-    </script>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+    © 2026 BRUTALS PK — All Rights Reserved.
+</footer>
+
+
+<script>
+
+/* ==========================================
+   RANDOM SPRINKLES
+   ALWAYS ON — NO BUTTON / NO SETTING
+========================================== */
+
+const sprinkleContainer = document.getElementById("sprinkles");
+
+const sprinkleCount = 65;
+
+for(let i = 0; i < sprinkleCount; i++){
+
+    const sprinkle = document.createElement("span");
+
+    sprinkle.className = "sprinkle";
+
+    // Random horizontal position
+    sprinkle.style.left = Math.random() * 100 + "%";
+
+    // Random starting position
+    sprinkle.style.top = (Math.random() * 100) + "%";
+
+    // Random size
+    const size = 2 + Math.random() * 5;
+
+    sprinkle.style.width = size + "px";
+    sprinkle.style.height = size + "px";
+
+    // Random animation duration
+    // Not too fast
+    sprinkle.style.animationDuration =
+        (10 + Math.random() * 12) + "s";
+
+    // Random delay
+    sprinkle.style.animationDelay =
+        (-Math.random() * 18) + "s";
+
+    // Random opacity
+    sprinkle.style.opacity =
+        (0.35 + Math.random() * 0.55);
+
+    sprinkleContainer.appendChild(sprinkle);
+}
+
+
+/* ==========================================
+   RANDOM NEW POSITIONS
+   Every few seconds slightly change direction
+========================================== */
+
+setInterval(() => {
+
+    const sprinkles =
+        document.querySelectorAll(".sprinkle");
+
+    sprinkles.forEach(s => {
+
+        const randomX =
+            (Math.random() * 80 - 40);
+
+        s.style.marginLeft =
+            randomX + "px";
+
+    });
+
+}, 5000);
+
+</script>
+
 </body>
 </html>
