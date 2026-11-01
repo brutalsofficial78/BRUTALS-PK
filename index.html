@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,467 +7,312 @@
 <title>BRUTALS PK</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
+html { scroll-behavior: smooth; }
 
-body{
-    font-family:Arial, Helvetica, sans-serif;
-    min-height:100vh;
-    color:#fff;
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
     background:
-        radial-gradient(circle at 20% 20%, rgba(123,47,255,.18), transparent 28%),
-        radial-gradient(circle at 80% 70%, rgba(76,0,255,.14), transparent 30%),
-        linear-gradient(135deg,#05010d,#0b0318 45%,#030008);
-    overflow-x:hidden;
+        radial-gradient(circle at 20% 20%, #281044 0, transparent 30%),
+        radial-gradient(circle at 80% 70%, #190b36 0, transparent 30%),
+        #08020f;
 }
 
-/* =========================
-   RANDOM SPRINKLES
-========================= */
-
-#sprinkles{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-    overflow:hidden;
-    z-index:0;
+/* ALWAYS ON SPRINKLES */
+#sprinkles {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
 }
 
-.sprinkle{
-    position:absolute;
-    width:5px;
-    height:5px;
-    border-radius:50%;
-    background:#b56cff;
-    box-shadow:
-        0 0 7px #9d4edd,
-        0 0 15px rgba(181,108,255,.8);
-    opacity:.75;
-    animation:floatSprinkle linear infinite;
+.sprinkle {
+    position: absolute;
+    border-radius: 50%;
+    background: #c78aff;
+    box-shadow: 0 0 8px #a64dff, 0 0 18px #8d32ff;
+    animation: floatUp linear infinite;
 }
 
-@keyframes floatSprinkle{
-    0%{
-        transform:translate3d(0,110vh,0) scale(.5);
-        opacity:0;
+@keyframes floatUp {
+    0% {
+        transform: translateY(110vh) translateX(0);
+        opacity: 0;
     }
-
-    10%{
-        opacity:.8;
-    }
-
-    50%{
-        transform:translate3d(30px,50vh,0) scale(1);
-    }
-
-    90%{
-        opacity:.7;
-    }
-
-    100%{
-        transform:translate3d(-35px,-10vh,0) scale(.4);
-        opacity:0;
+    15% { opacity: .8; }
+    50% { transform: translateY(50vh) translateX(25px); }
+    85% { opacity: .7; }
+    100% {
+        transform: translateY(-10vh) translateX(-25px);
+        opacity: 0;
     }
 }
 
-/* =========================
-   NAVBAR
-========================= */
-
-.navbar{
-    position:relative;
-    z-index:5;
-    width:100%;
-    padding:20px 7%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    background:rgba(5,1,13,.55);
-    backdrop-filter:blur(15px);
+/* NAVBAR */
+.navbar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 7%;
+    background: rgba(8, 2, 15, .75);
+    border-bottom: 1px solid #ffffff12;
+    backdrop-filter: blur(12px);
 }
 
-.logo{
-    font-size:25px;
-    font-weight:900;
-    letter-spacing:1px;
-    color:#fff;
-    text-shadow:0 0 15px rgba(165,90,255,.8);
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-shadow: 0 0 15px #a64dff;
 }
 
-.nav-right{
-    display:flex;
-    gap:12px;
+.nav-links {
+    display: flex;
+    gap: 12px;
 }
 
-.nav-btn{
-    text-decoration:none;
-    color:#fff;
-    padding:10px 18px;
-    border-radius:12px;
-    border:1px solid rgba(181,108,255,.35);
-    background:rgba(255,255,255,.05);
-    transition:.3s;
-    font-weight:700;
+.nav-btn {
+    color: white;
+    text-decoration: none;
+    padding: 10px 17px;
+    border: 1px solid #a64dff55;
+    border-radius: 12px;
+    background: #ffffff0a;
+    font-weight: bold;
+    transition: .3s;
 }
 
-.nav-btn:hover{
-    transform:translateY(-2px);
-    background:rgba(155,65,255,.2);
-    box-shadow:0 0 20px rgba(155,65,255,.3);
+.nav-btn:hover {
+    background: #7928d8;
+    transform: translateY(-2px);
 }
 
-/* =========================
-   HERO
-========================= */
-
-.hero{
-    position:relative;
-    z-index:2;
-    min-height:560px;
-    padding:75px 20px 65px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+/* HERO */
+.hero {
+    position: relative;
+    z-index: 1;
+    min-height: 510px;
+    padding: 65px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-.profile-wrap{
-    width:145px;
-    height:145px;
-    border-radius:50%;
-    padding:5px;
-    background:linear-gradient(135deg,#8d3cff,#d58cff,#641bff);
-    box-shadow:
-        0 0 25px rgba(142,52,255,.7),
-        0 0 65px rgba(142,52,255,.25);
-    animation:profileFloat 4s ease-in-out infinite;
+.profile-wrap {
+    width: 140px;
+    height: 140px;
+    padding: 5px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7628e9, #e2a1ff);
+    box-shadow: 0 0 35px #8d32ff88;
+    animation: profileFloat 4s ease-in-out infinite;
 }
 
-.profile-wrap img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    border-radius:50%;
-    display:block;
-    background:#10051b;
+.profile-wrap img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #160923;
 }
 
-@keyframes profileFloat{
-    0%,100%{
-        transform:translateY(0);
-    }
-    50%{
-        transform:translateY(-10px);
-    }
+@keyframes profileFloat {
+    50% { transform: translateY(-10px); }
 }
 
-.hero h1{
-    margin-top:30px;
-    font-size:clamp(48px,8vw,88px);
-    font-weight:1000;
-    letter-spacing:-3px;
-    background:linear-gradient(90deg,#fff,#c988ff,#fff);
-    -webkit-background-clip:text;
-    color:transparent;
-    animation:titleGlow 3s ease-in-out infinite;
+.hero h1 {
+    margin-top: 25px;
+    font-size: clamp(45px, 8vw, 82px);
+    font-weight: 1000;
+    background: linear-gradient(90deg, white, #c78aff, white);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow: 0 0 25px #a64dff22;
 }
 
-@keyframes titleGlow{
-    0%,100%{
-        filter:drop-shadow(0 0 8px rgba(176,83,255,.3));
-    }
-    50%{
-        filter:drop-shadow(0 0 25px rgba(176,83,255,.8));
-    }
+.hero p {
+    margin-top: 12px;
+    color: #b8a9c5;
+    line-height: 1.7;
+    max-width: 620px;
 }
 
-.hero p{
-    margin-top:12px;
-    max-width:650px;
-    color:#bdb4ca;
-    font-size:17px;
-    line-height:1.7;
+.hero-buttons {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 28px;
 }
 
-.hero-buttons{
-    margin-top:30px;
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
-    justify-content:center;
+.main-btn {
+    padding: 14px 23px;
+    border-radius: 13px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(135deg, #7628e9, #42118b);
+    transition: .3s;
 }
 
-.main-btn{
-    position:relative;
-    overflow:hidden;
-    text-decoration:none;
-    color:#fff;
-    font-weight:800;
-    padding:14px 25px;
-    border-radius:14px;
-    border:1px solid rgba(184,103,255,.5);
-    background:linear-gradient(135deg,#6f25d9,#3c1187);
-    box-shadow:0 10px 30px rgba(92,28,180,.25);
-    transition:.3s;
+.main-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 25px #963cff88;
 }
 
-.main-btn:hover{
-    transform:translateY(-4px) scale(1.02);
-    box-shadow:0 15px 35px rgba(130,40,255,.4);
+.discord { background: linear-gradient(135deg, #5865f2, #303ba7); }
+
+/* TOOLS */
+.tools-section {
+    position: relative;
+    z-index: 1;
+    padding: 20px 7% 85px;
 }
 
-.main-btn.discord{
-    background:linear-gradient(135deg,#5865f2,#3139a8);
+.section-title {
+    text-align: center;
+    font-size: 38px;
+    font-weight: 900;
 }
 
-/* =========================
-   TOOLS
-========================= */
-
-.tools-section{
-    position:relative;
-    z-index:2;
-    padding:20px 7% 90px;
+.section-subtitle {
+    text-align: center;
+    margin: 12px 0 40px;
+    color: #a99bb5;
 }
 
-.section-title{
-    text-align:center;
-    font-size:38px;
-    font-weight:900;
-    margin-bottom:10px;
+.tools-grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
 }
 
-.section-subtitle{
-    text-align:center;
-    color:#958aa3;
-    margin-bottom:40px;
+/* WHOLE CARD IS CLICKABLE */
+.tool-card {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    min-height: 265px;
+    padding: 30px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 22px;
+    border: 1px solid #a64dff35;
+    background: linear-gradient(145deg, #1b1128, #10091b);
+    transition: transform .3s, border-color .3s, box-shadow .3s;
 }
 
-.tools-grid{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
+.tool-card::before {
+    content: "";
+    position: absolute;
+    top: -90px;
+    right: -60px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: #8225d522;
+    pointer-events: none;
 }
 
-.tool-card{
-    position:relative;
-    overflow:hidden;
-    min-height:220px;
-    padding:30px;
-    border-radius:22px;
-    border:1px solid rgba(184,103,255,.18);
-    background:
-        linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
-    backdrop-filter:blur(15px);
-    box-shadow:0 15px 40px rgba(0,0,0,.25);
-    transition:.4s;
+.tool-card:hover {
+    transform: translateY(-8px);
+    border-color: #bd75ff;
+    box-shadow: 0 15px 40px #8c32ff30;
 }
 
-.tool-card::before{
-    content:"";
-    position:absolute;
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    top:-100px;
-    right:-80px;
-    background:rgba(143,54,255,.14);
-    filter:blur(5px);
-    transition:.5s;
+.tool-icon {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #7929df, #47118d);
+    font-size: 28px;
+    margin-bottom: 20px;
 }
 
-.tool-card::after{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-120%;
-    width:70%;
-    height:100%;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.08),
-        transparent
-    );
-    transform:skewX(-20deg);
-    transition:.7s;
+.tool-card h3 {
+    font-size: 23px;
+    margin-bottom: 12px;
 }
 
-.tool-card:hover{
-    transform:translateY(-8px);
-    border-color:rgba(185,103,255,.5);
-    box-shadow:
-        0 20px 45px rgba(0,0,0,.4),
-        0 0 25px rgba(137,45,255,.15);
+.tool-card p {
+    color: #b7aabe;
+    font-size: 14px;
+    line-height: 1.6;
 }
 
-.tool-card:hover::after{
-    left:140%;
+.open-text {
+    display: inline-block;
+    margin-top: 22px;
+    color: #c78aff;
+    font-weight: 800;
 }
 
-.tool-icon{
-    width:58px;
-    height:58px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:16px;
-    background:linear-gradient(135deg,#7228df,#3c117e);
-    box-shadow:0 0 20px rgba(137,45,255,.25);
-    font-size:27px;
-    margin-bottom:20px;
+footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 25px;
+    color: #82758d;
+    border-top: 1px solid #ffffff12;
 }
 
-.tool-card h3{
-    font-size:23px;
-    margin-bottom:10px;
+@media(max-width: 900px) {
+    .tools-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-.tool-card p{
-    color:#a99fb3;
-    line-height:1.6;
-    font-size:14px;
-    min-height:45px;
-}
-
-.tool-link{
-    display:inline-block;
-    margin-top:20px;
-    color:#c78aff;
-    text-decoration:none;
-    font-weight:800;
-    transition:.3s;
-}
-
-.tool-link:hover{
-    color:#fff;
-    transform:translateX(4px);
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    position:relative;
-    z-index:2;
-    padding:25px;
-    text-align:center;
-    border-top:1px solid rgba(255,255,255,.07);
-    color:#756b80;
-    background:rgba(0,0,0,.2);
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:900px){
-    .tools-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-}
-
-@media(max-width:600px){
-    .navbar{
-        padding:17px 5%;
-    }
-
-    .logo{
-        font-size:21px;
-    }
-
-    .nav-right{
-        gap:7px;
-    }
-
-    .nav-btn{
-        padding:8px 11px;
-        font-size:12px;
-    }
-
-    .hero{
-        min-height:520px;
-        padding-top:55px;
-    }
-
-    .profile-wrap{
-        width:120px;
-        height:120px;
-    }
-
-    .hero h1{
-        letter-spacing:-2px;
-    }
-
-    .hero p{
-        font-size:14px;
-        padding:0 10px;
-    }
-
-    .tools-section{
-        padding-left:5%;
-        padding-right:5%;
-    }
-
-    .tools-grid{
-        grid-template-columns:1fr;
-    }
-
-    .section-title{
-        font-size:31px;
-    }
+@media(max-width: 600px) {
+    .navbar { padding: 16px 5%; }
+    .logo { font-size: 19px; }
+    .nav-btn { padding: 9px 11px; font-size: 12px; }
+    .hero { min-height: 460px; }
+    .profile-wrap { width: 115px; height: 115px; }
+    .tools-grid { grid-template-columns: 1fr; }
+    .tools-section { padding-left: 5%; padding-right: 5%; }
+    .section-title { font-size: 31px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- RANDOM SPRINKLES - ALWAYS ON -->
 <div id="sprinkles"></div>
 
-<!-- NAVBAR -->
 <nav class="navbar">
     <div class="logo">BRUTALS PK</div>
 
-    <div class="nav-right">
+    <div class="nav-links">
         <a href="#tools" class="nav-btn">Explore</a>
-
-        <a
-            href="https://discord.gg/nf4Nnz2FA"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="nav-btn"
-        >
-            Discord
-        </a>
+        <a href="https://discord.gg/nf4Nnz2FA"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="nav-btn">Discord</a>
     </div>
 </nav>
 
-
-<!-- HERO -->
 <section class="hero">
 
-    <!--
-        IMPORTANT:
-        Apni purani DP/logo image ka naam agar alag hai
-        to neeche src="..." mein apni image ka filename likh dena.
-    -->
     <div class="profile-wrap">
-        <img src="logo.png" alt="BRUTALS PK">
+        <img src="logo.png" alt="BRUTALS PK Logo">
     </div>
 
     <h1>BRUTALS PK</h1>
@@ -477,229 +323,92 @@ footer{
     </p>
 
     <div class="hero-buttons">
+        <a href="#tools" class="main-btn">Explore Tools</a>
 
-        <a href="#tools" class="main-btn">
-            Explore Tools
-        </a>
-
-        <a
-            href="https://discord.gg/nf4Nnz2FA"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="main-btn discord"
-        >
-            Discord Server
-        </a>
-
+        <a href="https://discord.gg/nf4Nnz2FA"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="main-btn discord">Discord Server</a>
     </div>
 
 </section>
 
-
-<!-- TOOLS -->
 <section class="tools-section" id="tools">
 
     <h2 class="section-title">Explore Tools</h2>
-
     <p class="section-subtitle">
         Everything you need, built into BRUTALS PK.
     </p>
 
-
     <div class="tools-grid">
 
-        <!-- Sensitivity -->
-        <div class="tool-card">
-
+        <a href="sensitivity.html" class="tool-card">
             <div class="tool-icon">🎯</div>
-
             <h3>Sensitivity</h3>
+            <p>Find and explore mobile sensitivity settings for your gameplay.</p>
+            <span class="open-text">Open Tool →</span>
+        </a>
 
-            <p>
-                Find and explore mobile sensitivity settings
-                for your gameplay.
-            </p>
-
-            <a href="sensitivity.html" class="tool-link">
-                Open Tool →
-            </a>
-
-        </div>
-
-
-        <!-- Profile Maker -->
-        <div class="tool-card">
-
+        <a href="nickname.html" class="tool-card">
             <div class="tool-icon">✍️</div>
-
             <h3>Profile Maker</h3>
+            <p>Create stylish profiles and customize your profile text.</p>
+            <span class="open-text">Open Tool →</span>
+        </a>
 
-            <p>
-                Create stylish profiles and customize your
-                profile text.
-            </p>
-
-            <a href="nickname.html" class="tool-link">
-                Open Tool →
-            </a>
-
-        </div>
-
-
-        <!-- Wallpapers -->
-        <div class="tool-card">
-
+        <a href="wallpaper.html" class="tool-card">
             <div class="tool-icon">🖼️</div>
-
             <h3>Wallpapers</h3>
+            <p>Browse gaming, anime, cars, dark, aesthetic, 4K and Free Fire wallpapers.</p>
+            <span class="open-text">Open Tool →</span>
+        </a>
 
-            <p>
-                Browse gaming, anime, cars, dark, aesthetic,
-                4K and Free Fire wallpapers.
-            </p>
-
-            <a href="wallpaper.html" class="tool-link">
-                Open Tool →
-            </a>
-
-        </div>
-
-
-        <!-- PFP Maker -->
-        <div class="tool-card">
-
+        <a href="pfp-maker.html" class="tool-card">
             <div class="tool-icon">👤</div>
-
             <h3>Profile Picture Maker</h3>
+            <p>Make your own stylish profile picture with custom text and effects.</p>
+            <span class="open-text">Open Tool →</span>
+        </a>
 
-            <p>
-                Make your own stylish profile picture with
-                custom text and effects.
-            </p>
-
-            <a href="pfp-maker.html" class="tool-link">
-                Open Tool →
-            </a>
-
-        </div>
-
-
-        <!-- Bio Generator -->
-        <div class="tool-card">
-
+        <a href="biogenerator.html" class="tool-card">
             <div class="tool-icon">📝</div>
-
             <h3>Bio Generator</h3>
+            <p>Generate stylish Royal, Dark, Gamer, Attitude and Clean bios.</p>
+            <span class="open-text">Open Tool →</span>
+        </a>
 
-            <p>
-                Generate stylish Royal, Dark, Gamer,
-                Attitude and Clean bios.
-            </p>
-
-            <a href="biogenerator.html" class="tool-link">
-                Open Tool →
-            </a>
-
-        </div>
-
-
-        <!-- Crosshair Maker -->
-        <div class="tool-card">
-
+        <a href="crosshair.html" class="tool-card">
             <div class="tool-icon">⊕</div>
-
             <h3>Crosshair Maker</h3>
-
-            <p>
-                Create and customize your own crosshair
-                with different styles and colors.
-            </p>
-
-            <a href="crosshair.html" class="tool-link">
-                Open Tool →
-            </a>
-
-        </div>
+            <p>Create and customize your own crosshair with different styles and colors.</p>
+            <span class="open-text">Open Tool →</span>
+        </a>
 
     </div>
-
 </section>
 
-
-<!-- FOOTER -->
 <footer>
     © 2026 BRUTALS PK — All Rights Reserved.
 </footer>
 
-
 <script>
+/* RANDOM SPRINKLES - ALWAYS ON */
+const container = document.getElementById("sprinkles");
 
-/* ==========================================
-   RANDOM SPRINKLES
-   ALWAYS ON — NO BUTTON / NO SETTING
-========================================== */
+for (let i = 0; i < 65; i++) {
+    const dot = document.createElement("span");
+    dot.className = "sprinkle";
 
-const sprinkleContainer = document.getElementById("sprinkles");
+    const size = 2 + Math.random() * 4;
 
-const sprinkleCount = 65;
+    dot.style.width = size + "px";
+    dot.style.height = size + "px";
+    dot.style.left = Math.random() * 100 + "%";
+    dot.style.animationDuration = (12 + Math.random() * 12) + "s";
+    dot.style.animationDelay = (-Math.random() * 20) + "s";
 
-for(let i = 0; i < sprinkleCount; i++){
-
-    const sprinkle = document.createElement("span");
-
-    sprinkle.className = "sprinkle";
-
-    // Random horizontal position
-    sprinkle.style.left = Math.random() * 100 + "%";
-
-    // Random starting position
-    sprinkle.style.top = (Math.random() * 100) + "%";
-
-    // Random size
-    const size = 2 + Math.random() * 5;
-
-    sprinkle.style.width = size + "px";
-    sprinkle.style.height = size + "px";
-
-    // Random animation duration
-    // Not too fast
-    sprinkle.style.animationDuration =
-        (10 + Math.random() * 12) + "s";
-
-    // Random delay
-    sprinkle.style.animationDelay =
-        (-Math.random() * 18) + "s";
-
-    // Random opacity
-    sprinkle.style.opacity =
-        (0.35 + Math.random() * 0.55);
-
-    sprinkleContainer.appendChild(sprinkle);
+    container.appendChild(dot);
 }
-
-
-/* ==========================================
-   RANDOM NEW POSITIONS
-   Every few seconds slightly change direction
-========================================== */
-
-setInterval(() => {
-
-    const sprinkles =
-        document.querySelectorAll(".sprinkle");
-
-    sprinkles.forEach(s => {
-
-        const randomX =
-            (Math.random() * 80 - 40);
-
-        s.style.marginLeft =
-            randomX + "px";
-
-    });
-
-}, 5000);
-
 </script>
 
 </body>
