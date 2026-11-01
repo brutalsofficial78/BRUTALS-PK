@@ -4,291 +4,356 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BRUTALS PK</title>
+<meta name="description" content="BRUTALS PK - Gaming tools, wallpapers and profile makers.">
+<title>BRUTALS PK | Official Website</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 
-html { scroll-behavior: smooth; }
-
-body {
-    min-height: 100vh;
-    overflow-x: hidden;
-    font-family: Arial, sans-serif;
-    color: white;
-    background:
-        radial-gradient(circle at 20% 20%, #281044 0, transparent 30%),
-        radial-gradient(circle at 80% 70%, #190b36 0, transparent 30%),
-        #08020f;
+body{
+ min-height:100vh;
+ overflow-x:hidden;
+ font-family:Arial,sans-serif;
+ color:white;
+ background:
+ radial-gradient(circle at 18% 18%,#291044,transparent 31%),
+ radial-gradient(circle at 85% 70%,#190b36,transparent 32%),
+ #08020f;
 }
 
 /* ALWAYS ON SPRINKLES */
-#sprinkles {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
+#sprinkles{
+ position:fixed;
+ inset:0;
+ overflow:hidden;
+ pointer-events:none;
+ z-index:0;
 }
-
-.sprinkle {
-    position: absolute;
-    border-radius: 50%;
-    background: #c78aff;
-    box-shadow: 0 0 8px #a64dff, 0 0 18px #8d32ff;
-    animation: floatUp linear infinite;
+.sprinkle{
+ position:absolute;
+ border-radius:50%;
+ background:#c78aff;
+ box-shadow:0 0 8px #a64dff,0 0 18px #8d32ff;
+ animation:floatUp linear infinite;
 }
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(110vh) translateX(0);
-        opacity: 0;
-    }
-    15% { opacity: .8; }
-    50% { transform: translateY(50vh) translateX(25px); }
-    85% { opacity: .7; }
-    100% {
-        transform: translateY(-10vh) translateX(-25px);
-        opacity: 0;
-    }
+@keyframes floatUp{
+ 0%{transform:translateY(110vh) translateX(0);opacity:0}
+ 15%{opacity:.8}
+ 50%{transform:translateY(50vh) translateX(25px)}
+ 100%{transform:translateY(-10vh) translateX(-25px);opacity:0}
 }
 
 /* NAVBAR */
-.navbar {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 7%;
-    background: rgba(8, 2, 15, .75);
-    border-bottom: 1px solid #ffffff12;
-    backdrop-filter: blur(12px);
+.navbar{
+ position:relative;
+ z-index:2;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:15px;
+ padding:19px 7%;
+ background:#08020fbd;
+ border-bottom:1px solid #ffffff12;
+ backdrop-filter:blur(12px);
 }
-
-.logo {
-    font-size: 25px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-shadow: 0 0 15px #a64dff;
+.logo{
+ font-size:25px;
+ font-weight:900;
+ letter-spacing:1px;
+ text-shadow:0 0 15px #a64dff;
+ white-space:nowrap;
 }
-
-.nav-links {
-    display: flex;
-    gap: 12px;
+.nav-links{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
+ justify-content:flex-end;
 }
-
-.nav-btn {
-    color: white;
-    text-decoration: none;
-    padding: 10px 17px;
-    border: 1px solid #a64dff55;
-    border-radius: 12px;
-    background: #ffffff0a;
-    font-weight: bold;
-    transition: .3s;
+.nav-btn{
+ color:white;
+ text-decoration:none;
+ padding:10px 15px;
+ border:1px solid #a64dff55;
+ border-radius:12px;
+ background:#ffffff0a;
+ font-weight:bold;
+ transition:.3s;
 }
-
-.nav-btn:hover {
-    background: #7928d8;
-    transform: translateY(-2px);
+.nav-btn:hover{
+ background:#7928d8;
+ transform:translateY(-2px);
 }
+.tiktok-nav{border-color:#25dce5}
 
 /* HERO */
-.hero {
-    position: relative;
-    z-index: 1;
-    min-height: 510px;
-    padding: 65px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+.hero{
+ position:relative;
+ z-index:1;
+ min-height:500px;
+ padding:65px 20px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
 }
-
-.profile-wrap {
-    width: 140px;
-    height: 140px;
-    padding: 5px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #7628e9, #e2a1ff);
-    box-shadow: 0 0 35px #8d32ff88;
-    animation: profileFloat 4s ease-in-out infinite;
+.profile-wrap{
+ width:140px;
+ height:140px;
+ padding:5px;
+ border-radius:50%;
+ background:linear-gradient(135deg,#7628e9,#e2a1ff);
+ box-shadow:0 0 35px #8d32ff88;
+ animation:profileFloat 4s ease-in-out infinite;
 }
-
-.profile-wrap img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    background: #160923;
+.profile-wrap img{
+ width:100%;
+ height:100%;
+ border-radius:50%;
+ object-fit:cover;
+ background:#160923;
 }
-
-@keyframes profileFloat {
-    50% { transform: translateY(-10px); }
+@keyframes profileFloat{
+ 50%{transform:translateY(-10px)}
 }
-
-.hero h1 {
-    margin-top: 25px;
-    font-size: clamp(45px, 8vw, 82px);
-    font-weight: 1000;
-    background: linear-gradient(90deg, white, #c78aff, white);
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-    text-shadow: 0 0 25px #a64dff22;
+.hero h1{
+ margin-top:25px;
+ font-size:clamp(45px,8vw,82px);
+ font-weight:1000;
+ background:linear-gradient(90deg,#fff,#c78aff,#fff);
+ color:transparent;
+ background-clip:text;
+ -webkit-background-clip:text;
 }
-
-.hero p {
-    margin-top: 12px;
-    color: #b8a9c5;
-    line-height: 1.7;
-    max-width: 620px;
+.hero p{
+ margin-top:12px;
+ color:#b8a9c5;
+ line-height:1.7;
+ max-width:650px;
 }
-
-.hero-buttons {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 28px;
+.hero-buttons{
+ display:flex;
+ gap:14px;
+ flex-wrap:wrap;
+ justify-content:center;
+ margin-top:28px;
 }
-
-.main-btn {
-    padding: 14px 23px;
-    border-radius: 13px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    background: linear-gradient(135deg, #7628e9, #42118b);
-    transition: .3s;
+.main-btn{
+ display:inline-block;
+ padding:14px 23px;
+ border-radius:13px;
+ text-decoration:none;
+ color:white;
+ font-weight:bold;
+ background:linear-gradient(135deg,#7628e9,#42118b);
+ transition:.3s;
 }
-
-.main-btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 25px #963cff88;
+.main-btn:hover{
+ transform:translateY(-4px);
+ box-shadow:0 0 25px #963cff88;
 }
-
-.discord { background: linear-gradient(135deg, #5865f2, #303ba7); }
+.discord{
+ background:linear-gradient(135deg,#5865f2,#303ba7);
+}
+.tiktok-btn{
+ background:linear-gradient(120deg,#111,#303030);
+ border:1px solid #25dce5;
+}
 
 /* TOOLS */
-.tools-section {
-    position: relative;
-    z-index: 1;
-    padding: 20px 7% 85px;
+.tools-section{
+ position:relative;
+ z-index:1;
+ padding:20px 7% 85px;
+}
+.section-title{
+ text-align:center;
+ font-size:38px;
+ font-weight:900;
+}
+.section-subtitle{
+ text-align:center;
+ margin:12px 0 40px;
+ color:#a99bb5;
+}
+.tools-grid{
+ max-width:1200px;
+ margin:auto;
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:22px;
+}
+.tool-card{
+ display:block;
+ position:relative;
+ overflow:hidden;
+ min-height:265px;
+ padding:30px;
+ color:white;
+ text-decoration:none;
+ border-radius:22px;
+ border:1px solid #a64dff35;
+ background:linear-gradient(145deg,#1b1128,#10091b);
+ transition:.3s;
+}
+.tool-card:before{
+ content:"";
+ position:absolute;
+ top:-90px;
+ right:-60px;
+ width:180px;
+ height:180px;
+ border-radius:50%;
+ background:#8225d522;
+ pointer-events:none;
+}
+.tool-card:hover{
+ transform:translateY(-8px);
+ border-color:#bd75ff;
+ box-shadow:0 15px 40px #8c32ff30;
+}
+.tool-icon{
+ width:58px;
+ height:58px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ border-radius:16px;
+ background:linear-gradient(135deg,#7929df,#47118d);
+ font-size:28px;
+ margin-bottom:20px;
+}
+.tool-card h3{
+ font-size:23px;
+ margin-bottom:12px;
+}
+.tool-card p{
+ color:#b7aabe;
+ font-size:14px;
+ line-height:1.6;
+}
+.open-text{
+ display:inline-block;
+ margin-top:22px;
+ color:#c78aff;
+ font-weight:800;
 }
 
-.section-title {
-    text-align: center;
-    font-size: 38px;
-    font-weight: 900;
+/* TIKTOK SECTION */
+.tiktok-section{
+ position:relative;
+ z-index:1;
+ padding:75px 20px 90px;
+ text-align:center;
+ background:linear-gradient(180deg,transparent,#10091c,#08020f);
+}
+.tiktok-section h2{
+ font-size:clamp(32px,6vw,48px);
+ font-weight:900;
+ background:linear-gradient(90deg,#fff,#25dce5,#ff4b76);
+ color:transparent;
+ background-clip:text;
+ -webkit-background-clip:text;
+}
+.tiktok-intro{
+ color:#b8a9c5;
+ margin:14px 0 30px;
+}
+.tiktok-card{
+ max-width:440px;
+ margin:auto;
+ padding:27px;
+ border-radius:25px;
+ background:linear-gradient(145deg,#1b1128,#10091b);
+ border:1px solid #25dce544;
+ box-shadow:0 0 35px #25dce511;
+ transition:.3s;
+}
+.tiktok-card:hover{
+ transform:translateY(-6px);
+ box-shadow:0 0 35px #25dce522;
+}
+.tiktok-name{
+ font-size:25px;
+ font-weight:900;
+ margin-bottom:8px;
+}
+.tiktok-handle{
+ color:#a99bb5;
+ margin-bottom:20px;
+}
+.qr-image{
+ display:block;
+ width:100%;
+ max-width:330px;
+ height:auto;
+ margin:0 auto 22px;
+ border-radius:16px;
+ background:white;
+ padding:5px;
+}
+.tiktok-actions{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:12px;
+}
+.tiktok-action{
+ display:inline-block;
+ padding:13px 18px;
+ border-radius:11px;
+ text-decoration:none;
+ color:white;
+ font-weight:bold;
+ background:#171717;
+ border:1px solid #25dce566;
+ transition:.3s;
+}
+.tiktok-action:hover{
+ background:#303030;
+ transform:translateY(-3px);
+}
+.download-btn{
+ background:#7628d8;
+ border-color:#b36bff;
+}
+.tiktok-caption{
+ color:#a99bb5;
+ font-size:13px;
+ margin-top:18px;
+ line-height:1.6;
 }
 
-.section-subtitle {
-    text-align: center;
-    margin: 12px 0 40px;
-    color: #a99bb5;
+/* FOOTER */
+footer{
+ position:relative;
+ z-index:1;
+ text-align:center;
+ padding:25px;
+ color:#82758d;
+ border-top:1px solid #ffffff12;
 }
 
-.tools-grid {
-    max-width: 1200px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+/* MOBILE */
+@media(max-width:900px){
+ .tools-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-
-/* WHOLE CARD IS CLICKABLE */
-.tool-card {
-    display: block;
-    position: relative;
-    overflow: hidden;
-    min-height: 265px;
-    padding: 30px;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-    border-radius: 22px;
-    border: 1px solid #a64dff35;
-    background: linear-gradient(145deg, #1b1128, #10091b);
-    transition: transform .3s, border-color .3s, box-shadow .3s;
-}
-
-.tool-card::before {
-    content: "";
-    position: absolute;
-    top: -90px;
-    right: -60px;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: #8225d522;
-    pointer-events: none;
-}
-
-.tool-card:hover {
-    transform: translateY(-8px);
-    border-color: #bd75ff;
-    box-shadow: 0 15px 40px #8c32ff30;
-}
-
-.tool-icon {
-    width: 58px;
-    height: 58px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #7929df, #47118d);
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-.tool-card h3 {
-    font-size: 23px;
-    margin-bottom: 12px;
-}
-
-.tool-card p {
-    color: #b7aabe;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-.open-text {
-    display: inline-block;
-    margin-top: 22px;
-    color: #c78aff;
-    font-weight: 800;
-}
-
-footer {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 25px;
-    color: #82758d;
-    border-top: 1px solid #ffffff12;
-}
-
-@media(max-width: 900px) {
-    .tools-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media(max-width: 600px) {
-    .navbar { padding: 16px 5%; }
-    .logo { font-size: 19px; }
-    .nav-btn { padding: 9px 11px; font-size: 12px; }
-    .hero { min-height: 460px; }
-    .profile-wrap { width: 115px; height: 115px; }
-    .tools-grid { grid-template-columns: 1fr; }
-    .tools-section { padding-left: 5%; padding-right: 5%; }
-    .section-title { font-size: 31px; }
+@media(max-width:600px){
+ .navbar{
+  padding:16px 5%;
+  align-items:flex-start;
+  gap:12px;
+ }
+ .logo{font-size:19px}
+ .nav-links{justify-content:flex-end}
+ .nav-btn{padding:8px 10px;font-size:12px}
+ .hero{min-height:450px}
+ .profile-wrap{width:115px;height:115px}
+ .tools-grid{grid-template-columns:1fr}
+ .tools-section{padding-left:5%;padding-right:5%}
+ .section-title{font-size:31px}
+ .tiktok-card{padding:18px}
 }
 </style>
 </head>
@@ -297,117 +362,187 @@ footer {
 
 <div id="sprinkles"></div>
 
+<!-- NAVIGATION -->
 <nav class="navbar">
-    <div class="logo">BRUTALS PK</div>
+ <div class="logo">BRUTALS PK</div>
 
-    <div class="nav-links">
-        <a href="#tools" class="nav-btn">Explore</a>
-        <a href="https://discord.gg/nf4Nnz2FA"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="nav-btn">Discord</a>
-    </div>
+ <div class="nav-links">
+  <a href="#tools" class="nav-btn">Explore</a>
+
+  <a href="https://discord.gg/nf4Nnz2FA"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="nav-btn">Discord</a>
+
+  <a href="#tiktok" class="nav-btn tiktok-nav">TikTok</a>
+ </div>
 </nav>
 
+<!-- HERO SECTION -->
 <section class="hero">
 
-    <div class="profile-wrap">
-        <img src="logo.png" alt="BRUTALS PK Logo">
-    </div>
+ <div class="profile-wrap">
+  <img src="logo.png" alt="BRUTALS PK Logo">
+ </div>
 
-    <h1>BRUTALS PK</h1>
+ <h1>BRUTALS PK</h1>
 
-    <p>
-        Premium tools, wallpapers, profile makers and gaming utilities
-        — all in one place.
-    </p>
+ <p>
+  Premium tools, wallpapers, profile makers and gaming utilities
+  — all in one place.
+ </p>
 
-    <div class="hero-buttons">
-        <a href="#tools" class="main-btn">Explore Tools</a>
+ <div class="hero-buttons">
 
-        <a href="https://discord.gg/nf4Nnz2FA"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="main-btn discord">Discord Server</a>
-    </div>
+  <a href="#tools" class="main-btn">
+   Explore Tools
+  </a>
 
+  <a href="https://discord.gg/nf4Nnz2FA"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="main-btn discord">
+   Discord Server
+  </a>
+
+  <a href="https://www.tiktok.com/@brtxbonex"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="main-btn tiktok-btn">
+   TikTok Profile ↗
+  </a>
+
+ </div>
 </section>
 
+<!-- EXPLORE TOOLS -->
 <section class="tools-section" id="tools">
 
-    <h2 class="section-title">Explore Tools</h2>
-    <p class="section-subtitle">
-        Everything you need, built into BRUTALS PK.
-    </p>
+ <h2 class="section-title">Explore Tools</h2>
 
-    <div class="tools-grid">
+ <p class="section-subtitle">
+  Everything you need, built into BRUTALS PK.
+ </p>
 
-        <a href="sensitivity.html" class="tool-card">
-            <div class="tool-icon">🎯</div>
-            <h3>Sensitivity</h3>
-            <p>Find and explore mobile sensitivity settings for your gameplay.</p>
-            <span class="open-text">Open Tool →</span>
-        </a>
+ <div class="tools-grid">
 
-        <a href="nickname.html" class="tool-card">
-            <div class="tool-icon">✍️</div>
-            <h3>Profile Maker</h3>
-            <p>Create stylish profiles and customize your profile text.</p>
-            <span class="open-text">Open Tool →</span>
-        </a>
+  <a href="sensitivity.html" class="tool-card">
+   <div class="tool-icon">🎯</div>
+   <h3>Sensitivity</h3>
+   <p>Find and explore mobile sensitivity settings for your gameplay.</p>
+   <span class="open-text">Open Tool →</span>
+  </a>
 
-        <a href="wallpaper.html" class="tool-card">
-            <div class="tool-icon">🖼️</div>
-            <h3>Wallpapers</h3>
-            <p>Browse gaming, anime, cars, dark, aesthetic, 4K and Free Fire wallpapers.</p>
-            <span class="open-text">Open Tool →</span>
-        </a>
+  <a href="nickname.html" class="tool-card">
+   <div class="tool-icon">✍️</div>
+   <h3>Profile Maker</h3>
+   <p>Create stylish profiles and customize your profile text.</p>
+   <span class="open-text">Open Tool →</span>
+  </a>
 
-        <a href="pfp-maker.html" class="tool-card">
-            <div class="tool-icon">👤</div>
-            <h3>Profile Picture Maker</h3>
-            <p>Make your own stylish profile picture with custom text and effects.</p>
-            <span class="open-text">Open Tool →</span>
-        </a>
+  <a href="wallpaper.html" class="tool-card">
+   <div class="tool-icon">🖼️</div>
+   <h3>Wallpapers</h3>
+   <p>Browse gaming, anime, cars, dark, aesthetic, 4K and Free Fire wallpapers.</p>
+   <span class="open-text">Open Tool →</span>
+  </a>
 
-        <a href="biogenerator.html" class="tool-card">
-            <div class="tool-icon">📝</div>
-            <h3>Bio Generator</h3>
-            <p>Generate stylish Royal, Dark, Gamer, Attitude and Clean bios.</p>
-            <span class="open-text">Open Tool →</span>
-        </a>
+  <a href="pfp-maker.html" class="tool-card">
+   <div class="tool-icon">👤</div>
+   <h3>Profile Picture Maker</h3>
+   <p>Make your own stylish profile picture with custom text and effects.</p>
+   <span class="open-text">Open Tool →</span>
+  </a>
 
-        <a href="crosshair.html" class="tool-card">
-            <div class="tool-icon">⊕</div>
-            <h3>Crosshair Maker</h3>
-            <p>Create and customize your own crosshair with different styles and colors.</p>
-            <span class="open-text">Open Tool →</span>
-        </a>
+  <a href="biogenerator.html" class="tool-card">
+   <div class="tool-icon">📝</div>
+   <h3>Bio Generator</h3>
+   <p>Generate stylish Royal, Dark, Gamer, Attitude and Clean bios.</p>
+   <span class="open-text">Open Tool →</span>
+  </a>
 
-    </div>
+  <a href="crosshair.html" class="tool-card">
+   <div class="tool-icon">⊕</div>
+   <h3>Crosshair Maker</h3>
+   <p>Create and customize your own crosshair with different styles and colors.</p>
+   <span class="open-text">Open Tool →</span>
+  </a>
+
+ </div>
+</section>
+
+<!-- TIKTOK SECTION -->
+<section class="tiktok-section" id="tiktok">
+
+ <h2>Follow Me on TikTok</h2>
+
+ <p class="tiktok-intro">
+  Connect with BRUTALS PK on TikTok.
+ </p>
+
+ <div class="tiktok-card">
+
+  <div class="tiktok-name">BRT x BON3X</div>
+
+  <div class="tiktok-handle">@brtxbonex</div>
+
+  <a href="https://www.tiktok.com/@brtxbonex"
+     target="_blank"
+     rel="noopener noreferrer">
+
+   <img
+    class="qr-image"
+    src="tiktok-qr.png"
+    alt="BRT x BON3X TikTok QR Code">
+
+  </a>
+
+  <div class="tiktok-actions">
+
+   <a class="tiktok-action"
+      href="https://www.tiktok.com/@brtxbonex"
+      target="_blank"
+      rel="noopener noreferrer">
+    Open TikTok ↗
+   </a>
+
+   <a class="tiktok-action download-btn"
+      href="tiktok-qr.png"
+      download="BRT-x-BON3X-TikTok-QR.png">
+    Download QR ↓
+   </a>
+
+  </div>
+
+  <p class="tiktok-caption">
+   Scan the QR code or open my TikTok profile.
+  </p>
+
+ </div>
 </section>
 
 <footer>
-    © 2026 BRUTALS PK — All Rights Reserved.
+ © 2026 BRUTALS PK — All Rights Reserved.
 </footer>
 
 <script>
 /* RANDOM SPRINKLES - ALWAYS ON */
-const container = document.getElementById("sprinkles");
+const sprinkleArea=document.getElementById("sprinkles");
 
-for (let i = 0; i < 65; i++) {
-    const dot = document.createElement("span");
-    dot.className = "sprinkle";
+for(let i=0;i<65;i++){
 
-    const size = 2 + Math.random() * 4;
+ const dot=document.createElement("span");
+ dot.className="sprinkle";
 
-    dot.style.width = size + "px";
-    dot.style.height = size + "px";
-    dot.style.left = Math.random() * 100 + "%";
-    dot.style.animationDuration = (12 + Math.random() * 12) + "s";
-    dot.style.animationDelay = (-Math.random() * 20) + "s";
+ const size=2+Math.random()*4;
 
-    container.appendChild(dot);
+ dot.style.width=size+"px";
+ dot.style.height=size+"px";
+ dot.style.left=Math.random()*100+"%";
+ dot.style.animationDuration=(12+Math.random()*12)+"s";
+ dot.style.animationDelay=(-Math.random()*20)+"s";
+
+ sprinkleArea.appendChild(dot);
 }
 </script>
 
