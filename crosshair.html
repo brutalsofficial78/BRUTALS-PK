@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRUTALS PK - Crosshair Maker</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    min-height:100vh;
+    padding:20px;
+    font-family:Arial,sans-serif;
+    color:white;
+    background:radial-gradient(circle at top,#291044,#08020f 65%);
+}
+header{
+    max-width:1100px;
+    margin:15px auto 35px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.logo{font-size:23px;font-weight:900;color:#d5a0ff;text-shadow:0 0 15px #9a42ff}
+.back{color:#d5a0ff;text-decoration:none;border:1px solid #a65aff66;padding:10px 16px;border-radius:10px}
+main{max-width:1050px;margin:auto}
+.hero{text-align:center;margin:35px 0}
+.hero h1{font-size:clamp(35px,7vw,58px);background:linear-gradient(90deg,#fff,#c27aff);color:transparent;background-clip:text}
+.hero p{color:#b9a9c7;margin-top:12px}
+.panel{
+    background:#ffffff0a;
+    border:1px solid #a65aff35;
+    border-radius:20px;
+    padding:24px;
+    margin-bottom:22px;
+    backdrop-filter:blur(12px);
+}
+.heading{text-align:center;color:#d8a4ff;font-size:21px;font-weight:900;margin-bottom:22px;letter-spacing:2px}
+.editor{display:grid;grid-template-columns:1fr 1fr;gap:25px}
+.control{margin-bottom:20px}
+label{display:flex;justify-content:space-between;gap:10px;margin-bottom:10px;color:#dfd0eb;font-weight:bold}
+select,input[type=color]{
+    width:100%;height:45px;border-radius:10px;border:1px solid #a65aff55;
+    background:#160d22;color:white;padding:8px;
+}
+input[type=range]{width:100%;accent-color:#a64dff;cursor:pointer}
+input[type=checkbox]{accent-color:#a64dff;width:18px;height:18px}
+.checkrow{display:flex;align-items:center;gap:10px;color:#dfd0eb}
+.preview{
+    min-height:340px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    border:1px solid #a65aff35;
+    background:
+      radial-gradient(circle,#251333 0,#11091c 55%,#090410 100%);
+    overflow:hidden;
+}
+#crosshair{
+    position:relative;
+    width:150px;
+    height:150px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.part{position:absolute;background:#bd83ff;border-radius:2px}
+#top{bottom:calc(50% + var(--gap));width:var(--thickness);height:var(--size)}
+#bottom{top:calc(50% + var(--gap));width:var(--thickness);height:var(--size)}
+#left{right:calc(50% + var(--gap));height:var(--thickness);width:var(--size)}
+#right{left:calc(50% + var(--gap));height:var(--thickness);width:var(--size)}
+#dot{width:var(--dot);height:var(--dot);border-radius:50%;background:var(--color);position:absolute}
+#ring{
+    position:absolute;
+    width:var(--ring);
+    height:var(--ring);
+    border:var(--thickness) solid var(--color);
+    border-radius:50%;
+}
+.presets{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.preset,.action{
+    padding:11px 16px;
+    border:1px solid #a65aff55;
+    border-radius:10px;
+    background:#241334;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
+}
+.preset:hover,.action:hover{background:#7929d8;transform:translateY(-2px)}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.action.primary{background:linear-gradient(120deg,#812be4,#4c1590);flex:1}
+footer{text-align:center;color:#81738e;padding:30px 0}
+@media(max-width:700px){
+    .editor{grid-template-columns:1fr}
+    .panel{padding:17px}
+    .preview{min-height:280px}
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">BRUTALS PK</div>
+    <a href="index.html" class="back">← Back</a>
+</header>
+
+<main>
+    <section class="hero">
+        <h1>Crosshair Maker</h1>
+        <p>Create your own custom crosshair with different styles and colors.</p>
+    </section>
+
+    <section class="panel">
+        <div class="heading">EDITING MODE</div>
+
+        <div class="editor">
+            <div>
+                <div class="control">
+                    <label for="type">Crosshair Type</label>
+                    <select id="type">
+                        <option value="cross">Cross</option>
+                        <option value="dot">Dot</option>
+                        <option value="ring">Ring</option>
+                        <option value="both">Cross + Dot</option>
+                    </select>
+                </div>
+
+                <div class="control">
+                    <label for="color">Crosshair Color</label>
+                    <input type="color" id="color" value="#bd83ff">
+                </div>
+
+                <div class="control">
+                    <label for="size">Size <span id="sizeVal">20</span> px</label>
+                    <input type="range" id="size" min="5" max="55" value="20">
+                </div>
+
+                <div class="control">
+                    <label for="thickness">Thickness <span id="thickVal">3</span> px</label>
+                    <input type="range" id="thickness" min="1" max="10" value="3">
+                </div>
+
+                <div class="control">
+                    <label for="gap">Gap <span id="gapVal">5</span> px</label>
+                    <input type="range" id="gap" min="0" max="25" value="5">
+                </div>
+
+                <div class="control">
+                    <label for="ringSize">Ring Size <span id="ringVal">40</span> px</label>
+                    <input type="range" id="ringSize" min="10" max="100" value="40">
+                </div>
+
+                <label class="checkrow">
+                    <input type="checkbox" id="centerDot" checked>
+                    Show Center Dot
+                </label>
+            </div>
+
+            <div>
+                <div class="preview">
+                    <div id="crosshair">
+                        <div id="top" class="part"></div>
+                        <div id="bottom" class="part"></div>
+                        <div id="left" class="part"></div>
+                        <div id="right" class="part"></div>
+                        <div id="dot"></div>
+                        <div id="ring"></div>
+                    </div>
+                </div>
+                <div class="presets">
+                    <button class="preset" data-preset="purple">Purple Pro</button>
+                    <button class="preset" data-preset="white">Clean White</button>
+                    <button class="preset" data-preset="neon">Neon</button>
+                    <button class="preset" data-preset="dot">Dot</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="action" id="reset">Reset</button>
+            <button class="action primary" id="download">Download PNG ↓</button>
+        </div>
+    </section>
+</main>
+
+<footer>© 2026 BRUTALS PK — All Rights Reserved.</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const controls = ["type","color","size","thickness","gap","ringSize","centerDot"];
+
+function update() {
+    const type = $("type").value;
+    const color = $("color").value;
+    const size = Number($("size").value);
+    const thickness = Number($("thickness").value);
+    const gap = Number($("gap").value);
+    const ring = Number($("ringSize").value);
+    const dotEnabled = $("centerDot").checked;
+
+    $("sizeVal").textContent = size;
+    $("thickVal").textContent = thickness;
+    $("gapVal").textContent = gap;
+    $("ringVal").textContent = ring;
+
+    const root = $("crosshair");
+    root.style.setProperty("--color",color);
+    root.style.setProperty("--size",size+"px");
+    root.style.setProperty("--thickness",thickness+"px");
+    root.style.setProperty("--gap",gap+"px");
+    root.style.setProperty("--ring",ring+"px");
+    root.style.setProperty("--dot",Math.max(4,thickness+2)+"px");
+
+    const cross = type === "cross" || type === "both";
+    ["top","bottom","left","right"].forEach(id => {
+        $(id).style.display = cross ? "block" : "none";
+    });
+
+    $("dot").style.display =
+        (type === "dot" || (type === "both" && dotEnabled)) ? "block" :
+        (type === "cross" && dotEnabled) ? "block" : "none";
+
+    $("ring").style.display = type === "ring" ? "block" : "none";
+}
+
+controls.forEach(id => {
+    $(id).addEventListener("input",update);
+    $(id).addEventListener("change",update);
+});
+
+const presets = {
+    purple:{type:"cross",color:"#bd83ff",size:20,thickness:3,gap:5,ringSize:40,centerDot:true},
+    white:{type:"cross",color:"#ffffff",size:18,thickness:2,gap:6,ringSize:40,centerDot:false},
+    neon:{type:"both",color:"#00ffae",size:22,thickness:3,gap:4,ringSize:40,centerDot:true},
+    dot:{type:"dot",color:"#ff3b68",size:20,thickness:3,gap:5,ringSize:40,centerDot:true}
+};
+
+document.querySelectorAll(".preset").forEach(button => {
+    button.addEventListener("click",() => {
+        const preset = presets[button.dataset.preset];
+        Object.entries(preset).forEach(([key,value]) => {
+            if(key === "centerDot") $(key).checked = value;
+            else $(key).value = value;
+        });
+        update();
+    });
+});
+
+$("reset").addEventListener("click",() => {
+    Object.entries(presets.purple).forEach(([key,value]) => {
+        if(key === "centerDot") $(key).checked = value;
+        else $(key).value = value;
+    });
+    update();
+});
+
+function drawCrosshair(ctx, centerX, centerY) {
+    const type = $("type").value;
+    const color = $("color").value;
+    const size = Number($("size").value);
+    const thickness = Number($("thickness").value);
+    const gap = Number($("gap").value);
+    const ring = Number($("ringSize").value);
+    const dotEnabled = $("centerDot").checked;
+
+    ctx.fillStyle = color;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = thickness;
+    ctx.lineCap = "round";
+
+    if(type === "cross" || type === "both") {
+        ctx.fillRect(centerX-thickness/2,centerY-gap-size,thickness,size);
+        ctx.fillRect(centerX-thickness/2,centerY+gap,thickness,size);
+        ctx.fillRect(centerX-gap-size,centerY-thickness/2,size,thickness);
+        ctx.fillRect(centerX+gap,centerY-thickness/2,size,thickness);
+    }
+
+    if(type === "ring") {
+        ctx.beginPath();
+        ctx.arc(centerX,centerY,ring/2,0,Math.PI*2);
+        ctx.stroke();
+    }
+
+    if(type === "dot" || ((type === "cross" || type === "both") && dotEnabled)) {
+        ctx.beginPath();
+        ctx.arc(centerX,centerY,Math.max(2,thickness+1),0,Math.PI*2);
+        ctx.fill();
+    }
+}
+
+$("download").addEventListener("click",() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 512;
+    canvas.height = 512;
+
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0,0,512,512);
+
+    drawCrosshair(ctx,256,256);
+
+    const link = document.createElement("a");
+    link.download = "BRUTALS-PK-Crosshair.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+});
+
+update();
+</script>
+</body>
+</html>

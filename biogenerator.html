@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRUTALS PK - Bio Generator</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:radial-gradient(circle at top,#291044,#090311 65%);color:white;min-height:100vh;padding:20px}
+header{max-width:1100px;margin:15px auto 35px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:23px;font-weight:900;color:#d5a0ff;text-shadow:0 0 15px #9a42ff}
+a{color:#d5a0ff;text-decoration:none}
+.back{border:1px solid #a65aff66;padding:10px 16px;border-radius:10px}
+main{max-width:1000px;margin:auto}
+.hero{text-align:center;margin:40px 0}
+.hero h1{font-size:clamp(35px,7vw,60px);background:linear-gradient(90deg,#fff,#c27aff);color:transparent;background-clip:text}
+.hero p{color:#b9a9c7;margin-top:12px}
+.panel{background:#ffffff0a;border:1px solid #a65aff35;border-radius:20px;padding:24px;margin-bottom:25px;backdrop-filter:blur(12px)}
+label{display:block;margin-bottom:9px;color:#d9c5eb;font-weight:bold}
+input{width:100%;padding:14px;border:1px solid #a65aff55;border-radius:11px;background:#10091b;color:white;font-size:16px;outline:none}
+input:focus{border-color:#c17aff;box-shadow:0 0 15px #963cff44}
+.categories{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.category{padding:11px 16px;border:1px solid #a65aff55;border-radius:10px;background:#1b1029;color:white;cursor:pointer;font-weight:bold;transition:.25s}
+.category:hover,.category.active{background:#7629d5;border-color:#c78aff;box-shadow:0 0 18px #963cff55}
+.generate{width:100%;padding:15px;border:0;border-radius:12px;background:linear-gradient(120deg,#812be4,#4c1590);color:white;font-size:16px;font-weight:bold;cursor:pointer;margin-top:20px;transition:.25s}
+.generate:hover{transform:translateY(-3px);box-shadow:0 0 25px #963cff66}
+.results-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;gap:10px}
+.results-head h2{font-size:22px}
+.count{color:#bda2d2;font-size:13px}
+.bio-list{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.bio{background:#160d22;border:1px solid #a65aff30;padding:17px;border-radius:13px;animation:appear .4s both}
+.bio p{line-height:1.6;overflow-wrap:anywhere;color:#f0e8f7}
+.copy{margin-top:13px;background:#7125c6;color:white;border:0;padding:9px 15px;border-radius:8px;cursor:pointer;font-weight:bold}
+.copy:hover{background:#963cff}
+.toast{text-align:center;color:#d6a5ff;min-height:22px;margin-top:12px}
+footer{text-align:center;color:#81738e;padding:30px 0}
+@keyframes appear{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:650px){.bio-list{grid-template-columns:1fr}.panel{padding:17px}.hero{margin:30px 0}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">BRUTALS PK</div>
+<a class="back" href="index.html">← Back</a>
+</header>
+
+<main>
+<section class="hero">
+<h1>Bio Generator</h1>
+<p>Choose your style. Generate fresh bios. Copy your favourite.</p>
+</section>
+
+<section class="panel">
+<label for="username">Your name (optional)</label>
+<input id="username" type="text" maxlength="24" placeholder="Enter your name...">
+
+<div class="categories" id="categories">
+<button class="category active" data-type="Royal">👑 Royal</button>
+<button class="category" data-type="Dark">🌑 Dark</button>
+<button class="category" data-type="Gamer">🎮 Pro Gamer</button>
+<button class="category" data-type="Attitude">🔥 Attitude</button>
+<button class="category" data-type="Clean">✨ Clean</button>
+</div>
+
+<button class="generate" id="generate">Generate 30 Bios ✨</button>
+</section>
+
+<section class="panel">
+<div class="results-head">
+<h2 id="resultTitle">Royal Bios</h2>
+<span class="count">30 bios per section</span>
+</div>
+<div class="bio-list" id="bioList"></div>
+<div class="toast" id="toast" aria-live="polite"></div>
+</section>
+</main>
+
+<footer>© 2026 BRUTALS PK</footer>
+
+<script>
+const bios = {
+Royal: [
+"👑 Born to lead, not to follow.",
+"Royal mindset. Humble heart.",
+"Class is permanent. 👑",
+"Creating my own legacy.",
+"Elegance in every move.",
+"Silent moves, royal results.",
+"Not perfect, just original.",
+"Confidence is my crown.",
+"Dream big. Stay royal.",
+"Respect is earned, not demanded.",
+"Simple life, royal thoughts.",
+"Making history my way.",
+"Less noise, more class.",
+"Kingdom of my own dreams.",
+"Stay real. Stay royal.",
+"Grace in attitude, fire in ambition.",
+"Born unique, built different.",
+"Walking with purpose.",
+"Royal vibes only. ✨",
+"Success is my language.",
+"Never chasing, always creating.",
+"Character above everything.",
+"Think higher. Live better.",
+"Own your story.",
+"Calm mind, strong vision.",
+"Legacy over popularity.",
+"Dreams wear a crown.",
+"Respect all. Fear none.",
+"Quiet confidence, loud results.",
+"One of one. 👑"
+],
+Dark: [
+"🌑 Lost in thoughts, found in dreams.",
+"Silence has its own language.",
+"Dark nights, bright dreams.",
+"Behind the calm is a story.",
+"Not every chapter is visible.",
+"Peace in the shadows.",
+"Quiet soul, deep thoughts.",
+"Moonlight and midnight vibes.",
+"Some stories stay private.",
+"Less talking, more thinking.",
+"Walking my own night road.",
+"Eyes speak what words cannot.",
+"Finding light in silence.",
+"Private life, peaceful mind.",
+"Dreams beyond the darkness.",
+"Still waters run deep.",
+"Not cold, just careful.",
+"Midnight thoughts, endless goals.",
+"Calm outside, creative inside.",
+"Every shadow has a story.",
+"Silence is my comfort.",
+"Beyond what you see.",
+"Alone with my ambitions.",
+"Deep mind, simple life.",
+"Stars shine after dark.",
+"Keeping my world peaceful.",
+"Unwritten chapters ahead.",
+"Dark aesthetic, bright future.",
+"Quietly becoming better.",
+"Night thinker. 🌙"
+],
+Gamer: [
+"🎮 Play smart. Win fair.",
+"Gaming is my zone.",
+"Skill over excuses.",
+"One match at a time.",
+"Built for the challenge.",
+"Practice. Focus. Improve.",
+"Game face always on.",
+"Teamwork makes the dream work.",
+"Head in the game.",
+"Learning every round.",
+"Clutch mindset activated.",
+"Respect every opponent.",
+"Level up every day.",
+"Play fair, play strong.",
+"Strategy beats panic.",
+"Made for gaming moments.",
+"GG is always respect.",
+"Focus is my power-up.",
+"Gaming with purpose.",
+"Squad first. Always.",
+"New level, new goals.",
+"Calm aim, clear mind.",
+"Never stop improving.",
+"Every round teaches something.",
+"Ready for the next match.",
+"Good vibes, great games.",
+"Play hard, stay humble.",
+"Skill grows with practice.",
+"Game on. 🎯",
+"BRUTALS PK gamer."
+],
+Attitude: [
+"🔥 My vibe, my rules.",
+"Confidence speaks louder.",
+"Different path, same destination.",
+"Not here to impress.",
+"Original is my style.",
+"Focused on my own journey.",
+"Actions over words.",
+"Self-respect comes first.",
+"Unbothered and focused.",
+"Make your own standards.",
+"Real recognizes real.",
+"Never fake, always me.",
+"Big dreams, bold moves.",
+"Less drama, more progress.",
+"Born to be original.",
+"Energy never lies.",
+"Own your decisions.",
+"Stay strong, stay kind.",
+"Not competing with anyone.",
+"Be yourself without apology.",
+"Quiet confidence hits different.",
+"Stand tall. Stay true.",
+"Goals before gossip.",
+"Different by choice.",
+"Respect is everything.",
+"Not everyone gets my energy.",
+"Built on self-belief.",
+"Keep it real.",
+"Strong mind, kind heart.",
+"My journey, my pace."
+],
+Clean: [
+"✨ Keep life simple.",
+"Creating good memories.",
+"One day at a time.",
+"Dream. Learn. Grow.",
+"Good energy only.",
+"Making every moment count.",
+"Stay curious.",
+"Small steps, big dreams.",
+"Choose kindness.",
+"Living and learning.",
+"Keep moving forward.",
+"Be the reason for a smile.",
+"Peace over pressure.",
+"Enjoy the little things.",
+"Growing at my own pace.",
+"Stay humble, stay happy.",
+"Collect moments, not worries.",
+"New day, new possibilities.",
+"Grateful for today.",
+"Let your light shine.",
+"Simple thoughts, big goals.",
+"Always keep learning.",
+"Good things take time.",
+"Be kind. Be genuine.",
+"Find joy in the journey.",
+"Make today meaningful.",
+"Positive mind, peaceful life.",
+"Keep your dreams alive.",
+"More growth, less noise.",
+"Just getting started. ✨"
+]
+};
+
+let current = "Royal";
+const list = document.getElementById("bioList");
+const title = document.getElementById("resultTitle");
+const nameInput = document.getElementById("username");
+const toast = document.getElementById("toast");
+
+function shuffle(items) {
+    const copy = [...items];
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+}
+
+function generate() {
+    const name = nameInput.value.trim();
+    const selected = shuffle(bios[current]);
+
+    list.innerHTML = "";
+    title.textContent = current === "Gamer" ? "Pro Gamer Bios" : current + " Bios";
+    toast.textContent = "";
+
+    selected.forEach((text, index) => {
+        // Name is included in only some bios, not every result.
+        let finalText = text;
+        if (name && index % 5 === 0) {
+            finalText = name + " | " + text;
+        }
+
+        const card = document.createElement("article");
+        card.className = "bio";
+        card.style.animationDelay = (index * 0.018) + "s";
+
+        const paragraph = document.createElement("p");
+        paragraph.textContent = finalText;
+
+        const button = document.createElement("button");
+        button.className = "copy";
+        button.textContent = "Copy";
+
+        button.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(finalText);
+                button.textContent = "Copied ✓";
+                toast.textContent = "Bio copied successfully!";
+                setTimeout(() => button.textContent = "Copy", 1300);
+            } catch {
+                toast.textContent = "Copy unavailable. Please select the text manually.";
+            }
+        });
+
+        card.append(paragraph, button);
+        list.appendChild(card);
+    });
+}
+
+document.querySelectorAll(".category").forEach(button => {
+    button.addEventListener("click", () => {
+        document.querySelector(".category.active").classList.remove("active");
+        button.classList.add("active");
+        current = button.dataset.type;
+        generate();
+    });
+});
+
+document.getElementById("generate").addEventListener("click", generate);
+
+// Start with a shuffled set each time the page opens.
+generate();
+</script>
+</body>
+</html>
